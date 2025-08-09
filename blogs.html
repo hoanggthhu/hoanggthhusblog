@@ -1,97 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs - Hoanggth Hus</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body { font-family: Arial, sans-serif; background: #fdfdfd; }
-        .blog-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-        .blog-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            overflow: hidden;
-            transition: transform 0.2s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-        }
-        .blog-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .blog-card .content {
-            padding: 15px;
-        }
-        .blog-card h3 {
-            margin: 0 0 10px;
-            font-size: 1.2em;
-        }
-        .blog-card p {
-            font-size: 0.9em;
-            color: #555;
-        }
-        .read-more {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 12px;
-            background: #007BFF;
-            color: #fff;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-        .read-more:hover {
-            background: #0056b3;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blogs — Góc một chút bình yên</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Danh sách bài viết — Góc một chút bình yên">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="ve-toi.html">Về tôi</a>
-            <a href="contact.html">Liên lạc</a>
-        </nav>
-    </header>
+  <!-- ==== Header (giữ nguyên cấu trúc giống các trang khác) ==== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <h1>Hoàngg Thhư's Blog</h1>
+        <p class="tag"> Mình học cách yêu thương và trưởng thành</p>
+        <p class="tag"> với một trái tim nguyên vẹn</p>
+      </a>
 
-    <main>
-        <h1 style="text-align:center; margin-top:20px;">Danh sách Blogs</h1>
-        <div class="blog-container">
-            <div class="blog-card">
-                <img src="images/binh-yen.jpg" alt="Bình Yên">
-                <div class="content">
-                    <h3>Bình Yên</h3>
-                    <p>Những khoảnh khắc tĩnh lặng giữa cuộc sống vội vã...</p>
-                    <a href="binh-yen.html" class="read-more">Đọc tiếp</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="images/mo-nang.jpg" alt="Mơ Nắng">
-                <div class="content">
-                    <h3>Mơ Nắng</h3>
-                    <p>Giấc mơ mang hương vị của những tia nắng đầu ngày...</p>
-                    <a href="mo-nang.html" class="read-more">Đọc tiếp</a>
-                </div>
-            </div>
-            <div class="blog-card">
-                <img src="images/o-trong-vuon.jpg" alt="Ở Trong Vườn">
-                <div class="content">
-                    <h3>Ở Trong Vườn</h3>
-                    <p>Hành trình khám phá khu vườn đầy màu sắc...</p>
-                    <a href="o-trong-vuon.html" class="read-more">Đọc tiếp</a>
-                </div>
-            </div>
-        </div>
-    </main>
+      <button id="nav-toggle" aria-label="Toggle menu">☰</button>
+
+      <nav id="main-nav" class="main-nav">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <!-- Blogs ở đây: hiện tại trang Blogs sẽ active -->
+          <li><a href="blogs.html" class="active">Blogs</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
+          <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
+          <li><a href="binh-yen.html">Góc một chút bình yên</a></li>
+          <li><a href="ve-toi.html">Về mình</a></li>
+          <li><a href="contact.html">Liên lạc</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==== Main: danh sách bài (dùng class từ style.css: posts-grid / post-card) ==== -->
+  <main>
+    <section class="container">
+      <h2 style="margin-top:28px;">Tất cả bài viết</h2>
+      <p class="lead">Những mẩu chuyện nhỏ, mảnh vườn và vài lát yên — chọn bài bạn muốn đọc nhé.</p>
+
+      <div class="posts-grid" style="margin-top:18px;">
+        <!-- Card 1 -->
+        <article class="post-card">
+          <img src="https://picsum.photos/seed/binh-yen/800/600" alt="Bình Yên">
+          <div class="post-body">
+            <h4><a href="binh-yen.html">Góc một chút bình yên</a></h4>
+            <p>Những khoảnh khắc tĩnh lặng giữa cuộc sống vội vã — một chén trà, một mảnh vườn và đủ để thở nhẹ...</p>
+            <p style="margin-top:8px"><a class="read" href="binh-yen.html">Đọc tiếp →</a></p>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="post-card">
+          <img src="https://picsum.photos/seed/mo-nang/800/600" alt="Mơ Nắng">
+          <div class="post-body">
+            <h4><a href="mo-nang.html">Mơ Nắng — Đồ thêu & câu chuyện</a></h4>
+            <p>Giấc mơ mang hương vị của những tia nắng đầu ngày — nơi những đồ thủ công mang theo cả ký ức.</p>
+            <p style="margin-top:8px"><a class="read" href="mo-nang.html">Đọc tiếp →</a></p>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="post-card">
+          <img src="https://picsum.photos/seed/o-trong-vuon/800/600" alt="Ở Trong Vườn">
+          <div class="post-body">
+            <h4><a href="o-trong-vuon.html">Ở Trong Vườn</a></h4>
+            <p>Hành trình đi dạo trong vườn, nghe tiếng lá và tìm lại mấy điều đơn giản.</p>
+            <p style="margin-top:8px"><a class="read" href="o-trong-vuon.html">Đọc tiếp →</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==== Footer ==== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
