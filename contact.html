@@ -1,70 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liên Lạc - Hoanggth Hus</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body { font-family: Arial, sans-serif; background: #fdfdfd; }
-        .contact-container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        h1 { text-align: center; }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        label { margin-top: 10px; font-weight: bold; }
-        input, textarea {
-            margin-top: 5px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 1em;
-        }
-        button {
-            margin-top: 15px;
-            padding: 12px;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-        }
-        button:hover { background: #0056b3; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liên lạc — Hoàngg Thhư's Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Liên hệ với Hoàngg Thhư's Blog">
+  <style>
+    .contact-section {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .contact-section h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    form label {
+      display: block;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    form button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 18px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html">Trang chủ</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="ve-toi.html">Về tôi</a>
-            <a href="contact.html">Liên lạc</a>
-        </nav>
-    </header>
+  <!-- Header đồng bộ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+       <h1>Hoàngg Thhư's Blog</h1>
+       <p class="tag"> Mình học cách yêu thương và trưởng thành</p>
+       <p class="tag"> với một trái tim nguyên vẹn</p>
+      </a>
 
-    <div class="contact-container">
-        <h1>Liên hệ với tôi</h1>
-        <form action="https://formspree.io/f/mayppjya" method="POST">
-            <label for="name">Tên của bạn</label>
-            <input type="text" id="name" name="name" required>
+      <button id="nav-toggle" aria-label="Toggle menu">☰</button>
 
-            <label for="email">Email của bạn</label>
-            <input type="email" id="email" name="_replyto" required>
-
-            <label for="message">Tin nhắn</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-
-            <button type="submit">Gửi</button>
-        </form>
+      <nav id="main-nav" class="main-nav">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
+          <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
+          <li><a href="binh-yen.html">Góc bình yên</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="ve-toi.html">Về mình</a></li>
+          <li><a href="contact.html" class="active">Liên lạc</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <section class="contact-section">
+      <h2>Liên hệ với mình</h2>
+      <p style="text-align:center; color:#555;">Nếu bạn muốn nhắn gửi điều gì, điền vào form dưới đây nhé.</p>
+
+      <form action="https://formspree.io/f/mayppjya" method="POST">
+        <label for="name">Tên của bạn</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email của bạn</label>
+        <input type="email" id="email" name="_replyto" required>
+
+        <label for="message">Tin nhắn</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Gửi</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer đồng bộ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
