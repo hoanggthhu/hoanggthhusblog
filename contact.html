@@ -8,56 +8,85 @@
   <link rel="stylesheet" href="style.css">
   <meta name="description" content="Liên hệ với Hoàngg Thhư's Blog">
   <style>
+    body {
+      background: linear-gradient(135deg, #f9f9f9, #eef2f3);
+    }
     .contact-section {
-      max-width: 600px;
+      max-width: 650px;
       margin: 40px auto;
-      padding: 20px;
+      padding: 25px 30px;
       background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
     .contact-section h2 {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      font-family: 'Playfair Display', serif;
+    }
+    .contact-section p {
+      text-align: center;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    form .form-group {
+      margin-bottom: 18px;
     }
     form label {
       display: block;
       font-weight: 600;
-      margin-top: 12px;
+      margin-bottom: 6px;
+      color: #333;
     }
-    form input, form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
+    .input-wrapper {
+      display: flex;
+      align-items: center;
       border: 1px solid #ccc;
-      font-size: 1em;
+      border-radius: 8px;
+      padding: 0 10px;
+      background: #fafafa;
     }
-    form button {
+    .input-wrapper i {
+      color: #888;
+      margin-right: 8px;
+    }
+    .input-wrapper input,
+    .input-wrapper textarea {
+      border: none;
+      background: transparent;
+      padding: 10px 0;
+      flex: 1;
+      font-size: 1em;
+      outline: none;
+      resize: none;
+    }
+    button {
       display: block;
       width: 100%;
       padding: 12px;
-      margin-top: 18px;
-      background: #007BFF;
+      background: linear-gradient(90deg, #007BFF, #00aaff);
       color: #fff;
       border: none;
-      border-radius: 5px;
-      font-size: 1em;
+      border-radius: 8px;
+      font-size: 1.05em;
+      font-weight: 600;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
-    form button:hover {
-      background: #0056b3;
+    button:hover {
+      background: linear-gradient(90deg, #0056b3, #0088cc);
     }
   </style>
+  <script src="https://kit.fontawesome.com/a2e0e6ad6f.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- Header đồng bộ -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-       <h1>Hoàngg Thhư's Blog</h1>
-       <p class="tag"> Mình học cách yêu thương và trưởng thành</p>
-       <p class="tag"> với một trái tim nguyên vẹn</p>
+        <h1>Hoàngg Thhư's Blog</h1>
+        <p class="tag"> Mình học cách yêu thương và trưởng thành</p>
+        <p class="tag"> với một trái tim nguyên vẹn</p>
       </a>
 
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
@@ -65,10 +94,10 @@
       <nav id="main-nav" class="main-nav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
           <li><a href="mo-nang.html">Mơ Nắng</a></li>
           <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
-          <li><a href="binh-yen.html">Góc bình yên</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="binh-yen.html">Góc một chút bình yên</a></li>
           <li><a href="ve-toi.html">Về mình</a></li>
           <li><a href="contact.html" class="active">Liên lạc</a></li>
         </ul>
@@ -79,19 +108,34 @@
   <main>
     <section class="contact-section">
       <h2>Liên hệ với mình</h2>
-      <p style="text-align:center; color:#555;">Nếu bạn muốn nhắn gửi điều gì, điền vào form dưới đây nhé.</p>
+      <p>Nếu bạn muốn nhắn gửi điều gì, điền vào form dưới đây nhé 💌</p>
 
       <form action="https://formspree.io/f/mayppjya" method="POST">
-        <label for="name">Tên của bạn</label>
-        <input type="text" id="name" name="name" required>
+        <div class="form-group">
+          <label for="name">Tên của bạn</label>
+          <div class="input-wrapper">
+            <i class="fas fa-user"></i>
+            <input type="text" id="name" name="name" placeholder="Nhập tên..." required>
+          </div>
+        </div>
 
-        <label for="email">Email của bạn</label>
-        <input type="email" id="email" name="_replyto" required>
+        <div class="form-group">
+          <label for="email">Email của bạn</label>
+          <div class="input-wrapper">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" name="_replyto" placeholder="Nhập email..." required>
+          </div>
+        </div>
 
-        <label for="message">Tin nhắn</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+        <div class="form-group">
+          <label for="message">Tin nhắn</label>
+          <div class="input-wrapper" style="align-items: flex-start;">
+            <i class="fas fa-comment"></i>
+            <textarea id="message" name="message" rows="4" placeholder="Viết điều bạn muốn chia sẻ..." required></textarea>
+          </div>
+        </div>
 
-        <button type="submit">Gửi</button>
+        <button type="submit"><i class="fas fa-paper-plane"></i> Gửi tin nhắn</button>
       </form>
     </section>
   </main>
