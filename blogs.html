@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - Hoanggth Hus</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: Arial, sans-serif; background: #fdfdfd; }
+        .blog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .blog-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        .blog-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .blog-card .content {
+            padding: 15px;
+        }
+        .blog-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+        .blog-card p {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .read-more {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .read-more:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Trang chủ</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="ve-toi.html">Về tôi</a>
+            <a href="contact.html">Liên lạc</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 style="text-align:center; margin-top:20px;">Danh sách Blogs</h1>
+        <div class="blog-container">
+            <div class="blog-card">
+                <img src="images/binh-yen.jpg" alt="Bình Yên">
+                <div class="content">
+                    <h3>Bình Yên</h3>
+                    <p>Những khoảnh khắc tĩnh lặng giữa cuộc sống vội vã...</p>
+                    <a href="binh-yen.html" class="read-more">Đọc tiếp</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="images/mo-nang.jpg" alt="Mơ Nắng">
+                <div class="content">
+                    <h3>Mơ Nắng</h3>
+                    <p>Giấc mơ mang hương vị của những tia nắng đầu ngày...</p>
+                    <a href="mo-nang.html" class="read-more">Đọc tiếp</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="images/o-trong-vuon.jpg" alt="Ở Trong Vườn">
+                <div class="content">
+                    <h3>Ở Trong Vườn</h3>
+                    <p>Hành trình khám phá khu vườn đầy màu sắc...</p>
+                    <a href="o-trong-vuon.html" class="read-more">Đọc tiếp</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
