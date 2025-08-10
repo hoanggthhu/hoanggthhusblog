@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ở Trong Vườn — Hương liệu & cây cỏ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Hiệu ứng chữ gradient động */
+    .gradient-title {
+      background: linear-gradient(270deg, #6a4caf, #ff8a65, #6a4caf);
+      background-size: 600% 600%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      animation: gradientMove 8s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Hover underline cho menu */
+    .main-nav a {
+      position: relative;
+      text-decoration: none;
+    }
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+    .main-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Danh sách bài viết */
+    .posts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .post-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+    }
+    .post-card.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .post-card:hover {
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+
+    .post-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+    .post-card:hover img {
+      transform: scale(1.08) rotate(1deg);
+      filter: brightness(1.07);
+    }
+
+    .post-body {
+      padding: 1rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-body h4 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+    .post-body .excerpt {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 0.75rem;
+    }
+    .post-body .read {
+      text-decoration: none;
+      color: #6a4caf;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+    .post-body .read:hover {
+      color: #ff8a65;
+    }
+
+    /* Burger icon */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .burger span {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      transition: transform 0.3s ease;
+    }
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    @media (max-width: 768px) {
+      .burger { display: flex; }
+      .main-nav {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+      }
+      .main-nav.active { display: flex; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <h1 class="gradient-title">Ở Trong Vườn</h1>
+        <p class="tag">Hương liệu thảo mộc — nhật ký vườn</p>
+      </a>
+      <div class="burger" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
+          <li><a href="o-trong-vuon.html" class="active">Ở Trong Vườn</a></li>
+          <li><a href="binh-yen.html">Góc bình yên</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="ve-toi.html">Về mình</a></li>
+          <li><a href="contact.html">Liên lạc</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="category-header">
+      <h2>Nhật ký của mùi hương</h2>
+      <p class="lead">Kiến thức cây cỏ, công thức mùi và những ghi chép từ vườn nhỏ.</p>
+    </section>
+
+    <section class="posts-list">
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
+        <div class="post-body">
+          <h4>Hàm hương — hương thơm nhẹ như làn gió sớm mai</h4>
+          <p class="excerpt">Tìm hiểu đặc tính, cách dùng và cảm nhận của hàm hương trong sản phẩm.</p>
+          <a href="#" class="read">Đọc</a>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1501004017187-8f3b0c6c8c9d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
+        <div class="post-body">
+          <h4>Làm túi thơm từ thảo mộc tươi — hướng dẫn đơn giản</h4>
+          <p class="excerpt">Công thức dễ làm tại nhà để tạo túi thơm chữa lành.</p>
+          <a href="#" class="read">Đọc</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year3"></span> Hoàngg Thhư's Blog</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const burger = document.getElementById('burger');
+      const nav = document.getElementById('mainNav');
+      const cards = document.querySelectorAll('.post-card');
+
+      // Toggle menu
+      burger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        nav.classList.toggle('active');
+        burger.classList.toggle('active');
+      });
+
+      // Đóng menu khi click ra ngoài
+      document.addEventListener('click', function (e) {
+        if (!burger.contains(e.target) && !nav.contains(e.target)) {
+          nav.classList.remove('active');
+          burger.classList.remove('active');
+        }
+      });
+
+      // Scroll reveal hiệu ứng
+      function revealOnScroll() {
+        const triggerBottom = window.innerHeight * 0.85;
+        cards.forEach(card => {
+          const cardTop = card.getBoundingClientRect().top;
+          if (cardTop < triggerBottom) {
+            card.classList.add('show');
+          }
+        });
+      }
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll();
+
+      // Năm tự động
+      document.getElementById('year3').textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
