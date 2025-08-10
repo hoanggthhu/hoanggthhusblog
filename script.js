@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const messages = {
     "mo-nang.html": "Giặt những giấc mơ rồi phơi dưới nắng",
     "o-trong-vuon.html": "Nơi mùi hương biết kể chuyện nữa",
-    "binh-yen.html": "Chúc bạn một ngày bình an!",
-    "blogs.html": "Những câu chuyện bên lề ở đây",
+    "binh-yen.html": "Chậm lại một chút, để thấy mình đang sống",
+    "blogs.html": "Dừng lại để nghe những câu chuyện bên lề ở đây",
     "ve-toi.html": "Đôi dòng về mình"
   };
 
