@@ -186,11 +186,20 @@
     document.addEventListener("DOMContentLoaded", function() {
       const toggle = document.querySelector(".menu-toggle");
       const nav = document.querySelector(".main-nav");
+
       if (toggle && nav) {
         toggle.addEventListener("click", () => {
           nav.classList.toggle("nav-open");
         });
+
+        // Đóng menu khi bấm link
+        nav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            nav.classList.remove("nav-open");
+          });
+        });
       }
+
       // Năm hiện tại
       const yearEl = document.getElementById("year4");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -223,5 +232,6 @@
   </script>
 </body>
 </html>
+
 
 
