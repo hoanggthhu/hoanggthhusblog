@@ -83,6 +83,46 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Burger menu style */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      .main-nav {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+      .main-nav.nav-open {
+        display: flex;
+      }
+      .main-nav ul {
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+      }
+      .main-nav li {
+        list-style: none;
+        border-bottom: 1px solid #eee;
+      }
+      .main-nav a {
+        display: block;
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -92,6 +132,7 @@
         <h1 class="gradient-title">Góc bình yên</h1>
         <p class="tag">Một chút trà, bánh và một câu chuyện</p>
       </a>
+      <button class="menu-toggle">☰</button>
       <nav class="main-nav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
@@ -139,8 +180,22 @@
       <p>&copy; <span id="year4"></span> Hoàngg Thhư's Blog</p>
     </div>
   </footer>
-  
-  <script src="script.js"></script>
+
+  <!-- Burger menu script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector(".main-nav");
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          nav.classList.toggle("nav-open");
+        });
+      }
+      // Năm hiện tại
+      const yearEl = document.getElementById("year4");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    });
+  </script>
 
   <!-- Browser Detect -->
   <script>
@@ -168,4 +223,5 @@
   </script>
 </body>
 </html>
+
 
