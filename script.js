@@ -62,6 +62,14 @@ document.addEventListener('DOMContentLoaded', function(){
       typeWriterEffect("typewriter", text, 50);
     }
   }
+
+  // === Auto active menu ===
+  document.querySelectorAll(".main-nav a").forEach(link => {
+    if (link.getAttribute("href") === currentPage || 
+        (currentPage === "" && link.getAttribute("href") === "index.html")) {
+      link.classList.add("active");
+    }
+  });
 });
 
 // Typewriter helper
@@ -77,16 +85,11 @@ function typeWriterEffect(elementId, text, speed) {
   }
   typing();
 }
-
-// === Thêm đoạn auto active menu ===
-const currentPage = window.location.pathname.split("/").pop();
-document.querySelectorAll(".main-nav a").forEach(link => {
-  if (link.getAttribute("href") === currentPage) {
-    link.classList.add("active");
-  }
-});
 </script>
 </body>
 </html>
+
+
+
 
 
