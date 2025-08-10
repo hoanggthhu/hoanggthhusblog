@@ -3,22 +3,101 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hoàngg Thhư's Blog</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Liên lạc — Hoàngg Thhư's Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Mơ Nắng — nơi những đồ thêu thủ công, hương vườn và những câu chuyện chữa lành gặp nhau.">
+  <meta name="description" content="Liên hệ với Hoàngg Thhư's Blog">
+  <style>
+    body { background: linear-gradient(135deg, #f9f9f9, #f5f1ee); }
+    .contact-section {
+      max-width: 650px;
+      margin: 48px auto;
+      padding: 26px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    .contact-section h2 {
+      text-align: center;
+      margin-bottom: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+    }
+    .contact-section p.lead { text-align:center; color:#666; margin-bottom:18px; }
+    .form-group { margin-bottom:14px; }
+    label { display:block; font-weight:600; margin-bottom:6px; color:#222; }
+    input[type="text"], input[type="email"], textarea {
+      width:100%; padding:10px 12px; border-radius:8px; border:1px solid #ddd;
+      background: #fcfcfc; font-size:0.98rem; outline:none;
+    }
+    textarea { min-height:120px; resize:vertical; }
+    .btn { display:block; width:100%; padding:12px; border-radius:10px; color:#fff; font-weight:600; border:none; cursor:pointer; text-align:center; }
+    .btn:hover { opacity:0.95; }
+    @media (max-width:640px){
+      .contact-section { margin: 20px; padding:18px; }
+    }
+  </style>
+
+  <!-- Browser detect -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var ua = navigator.userAgent;
+      if (/MSIE|Trident/.test(ua)) {
+        var popup = document.createElement("div");
+        popup.style.position = "fixed";
+        popup.style.top = "0";
+        popup.style.left = "0";
+        popup.style.width = "100%";
+        popup.style.height = "100%";
+        popup.style.backgroundColor = "rgba(0,0,0,0.5)";
+        popup.style.display = "flex";
+        popup.style.justifyContent = "center";
+        popup.style.alignItems = "center";
+        popup.style.zIndex = "9999";
+        popup.innerHTML = `
+          <div style="
+            background: #fff;
+            padding: 24px 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+          ">
+            <h2 style="color:#b45309; font-size:1.3rem; margin-bottom:12px;">⚠ Trình duyệt không được hỗ trợ</h2>
+            <p style="color:#444; line-height:1.5; margin-bottom:18px;">
+              Bạn đang dùng một trình duyệt quá cũ.<br>
+              Hãy dùng <strong>Chrome</strong>, <strong>Edge</strong>, <strong>Firefox</strong> hoặc <strong>Safari</strong> để trải nghiệm tốt hơn nhé 💛
+            </p>
+            <button id="closeBrowserNotice" style="
+              padding: 8px 16px;
+              background: linear-gradient(135deg, var(--accent1, #f59e0b), var(--accent2, #ef4444));
+              color: #fff;
+              border: none;
+              border-radius: 8px;
+              font-weight: 600;
+              cursor: pointer;
+            ">Đã hiểu</button>
+          </div>
+        `;
+        document.body.appendChild(popup);
+        document.getElementById("closeBrowserNotice").addEventListener("click", function(){
+          popup.remove();
+        });
+      }
+    });
+  </script>
 </head>
 <body>
+  <!-- header giữ nguyên -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-       <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
-       <p class="tag"> Mình học cách yêu thương</p>
-       <p class="tag"> và trưởng thành với một trái tim vẹn nguyên</p>
+        <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
+        <p class="tag"> Mình học cách yêu thương</p>
+        <p class="tag"> và trưởng thành với một trái tim nguyên vẹn</p>
       </a>
-
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
-
       <nav id="main-nav" class="main-nav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
@@ -27,93 +106,37 @@
           <li><a href="binh-yen.html">Góc bình yên</a></li>
           <li><a href="blogs.html">Blogs</a></li>
           <li><a href="ve-toi.html">Về mình</a></li>
-          <li><a href="contact.html">Liên lạc</a></li>
+          <li><a href="contact.html" class="active">Liên lạc</a></li>
         </ul>
       </nav>
     </div>
   </header>
-
   <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <h2 class="typing" data-text="Bà ơi! Lại đây, ngồi xuống để nghe vài câu chuyện nhỏ nè!"></h2>
-          <p class="lead">Những món nho nhỏ, một mảnh vườn và vài tờ nhật ký. Nơi mọi điều nhỏ bé có thể xoa dịu bớt những tổn thương trong bạn.</p>
-          <p><a href="editorial.html" class="btn">Kế hoạch nội dung & series</a></p>
+    <section class="contact-section">
+      <h2 class="gradient-title">Liên hệ với mình</h2>
+      <p class="lead">Nếu bạn muốn nhắn gửi điều gì, điền vào form dưới đây nhé 💌</p>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-group">
+          <label for="name">Họ và tên</label>
+          <input id="name" name="name" type="text" placeholder="Nhập tên của bạn" required>
         </div>
-        <div class="hero-image" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=0b1b2609d3be4e8eea1f8a1aa1f4b18b" alt="Vintage handcraft and sunlight">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" name="_replyto" type="email" placeholder="Nhập email của bạn" required>
         </div>
-      </div>
+        <div class="form-group">
+          <label for="message">Nội dung tin nhắn</label>
+          <textarea id="message" name="message" placeholder="Viết điều bạn muốn chia sẻ..." required></textarea>
+        </div>
+        <button type="submit" class="btn">Gửi tin nhắn</button>
+      </form>
     </section>
-
-    <section class="three-cards container">
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=5f8d9e8b6f6c5c9c2b8f9e3a4d0ad2f2" alt="Mơ Nắng">
-        <div class="card-body">
-          <h3>Mơ Nắng</h3>
-          <p>Những câu chuyện về Mơ Nắng và các sản phẩm mang năng lượng chữa lành.</p>
-          <a class="card-link" href="mo-nang.html">Khám phá →</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b19f5a0a9a20c2b37b1b9c9a7e4f8a9" alt="Ở Trong Vườn">
-        <div class="card-body">
-          <h3>Ở Trong Vườn</h3>
-          <p>Ở đây có hương thơm từ vườn nhà và những câu chuyện mà cây cỏ sẽ kể bạn nghe.</p>
-          <a class="card-link" href="o-trong-vuon.html">Khám phá →</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6b6e2f4b7d3d2c4f5f9a2c8f3e4b7c1e" alt="Góc một chút bình yên">
-        <div class="card-body">
-          <h3>Góc bình yên</h3>
-          <p>Những dòng tâm sự và những câu chuyện xoa dịu cả mình và bạn.</p>
-          <a class="card-link" href="binh-yen.html">Khám phá →</a>
-        </div>
-      </article>
-    </section>
-
-    <section class="container posts-preview">
-      <h3 class="section-title">Bài mới</h3>
-      <div class="posts-grid">
-        <article class="post-card">
-          <img src="https://images.unsplash.com/photo-1506368249639-73a05d6f6488?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5d89b4e8f0b5d8b4a1f3e6f0a5b2c3d4" alt="">
-          <div class="post-body">
-            <h4>Hành trình một chiếc khăn tay</h4>
-            <p class="excerpt">Từ nét thêu đầu tiên đến lúc chạm tay khách là bao nhiêu câu chuyện nhỏ lẩn khuất trong kim chỉ.</p>
-            <a href="#" class="read">Đọc</a>
-          </div>
-        </article>
-
-        <article class="post-card">
-          <img src="https://images.unsplash.com/photo-1518976024611-3f64b8a0f5b9?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ce1f0dc3b4e1a2b3c4d5e6f7a8b9c0d1" alt="">
-          <div class="post-body">
-            <h4>Hàm hương "Sớm mai trong tách trà"</h4>
-            <p class="excerpt">Mùi hương nhẹ như làn gió, cách mình lưu giữ mùi hương trong túi thơm.</p>
-            <a href="#" class="read">Đọc</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
   </main>
-
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-left">
-        <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog — All gentle rights reserved.</p>
-      </div>
-      <div class="footer-right">
-        <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a href="mailto:youremail@example.com">Email</a>
-      </div>
+      <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog</p>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
