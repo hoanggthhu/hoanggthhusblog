@@ -117,13 +117,30 @@
       const navToggle = document.getElementById("nav-toggle");
       const mainNav = document.getElementById("main-nav");
 
-      navToggle.addEventListener("click", function(){
-        mainNav.classList.toggle("active");
-      });
+      if (navToggle && mainNav) {
+        // Mở / đóng menu khi bấm burger
+        navToggle.addEventListener("click", function(){
+          mainNav.classList.toggle("active");
+        });
+
+        // Đóng menu khi bấm vào link
+        mainNav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", function(){
+            mainNav.classList.remove("active");
+          });
+        });
+      }
+
+      // Hiển thị năm
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
     });
   </script>
   
   <script src="script.js"></script>
 </body>
 </html>
+
 
