@@ -70,7 +70,13 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      transition: transform 0.3s ease;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    .post-card.visible {
+      transform: translateY(0);
+      opacity: 1;
     }
     .post-card:hover {
       transform: translateY(-5px);
@@ -127,7 +133,7 @@
         display: none;
         background: white;
         position: fixed;
-        top: 60px; /* bằng chiều cao header */
+        top: 60px;
         right: 0;
         left: 0;
         padding: 10px 0;
@@ -228,6 +234,7 @@
       <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog</p>
     </div>
   </footer>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -245,9 +252,25 @@
         document.body.classList.remove("no-scroll");
       });
     });
+
+    // Hiệu ứng fade-in cho post-card với delay so le
+    const postCards = document.querySelectorAll('.post-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(postCards).indexOf(entry.target);
+          entry.target.style.transitionDelay = `${index * 0.15}s`;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    postCards.forEach(card => observer.observe(card));
   </script>
 </body>
 </html>
+
 
 
 
