@@ -286,4 +286,10 @@
         })
         .catch(err => {
           console.error('Lỗi tải blog.json:', err);
-          postsList.innerHTML = '<p>Không tải được
+          postsList.innerHTML = '<p>Không tải được danh sách blog.</p>';
+        });
+    });
+  </script>
+</body>
+</html>
+
