@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css">
   <meta name="description" content="Liên hệ với Hoàngg Thhư's Blog">
   <style>
-    /* Trang contact - chỉnh nhẹ */
     body { background: linear-gradient(135deg, #f9f9f9, #f5f1ee); }
     .contact-section {
       max-width: 650px;
@@ -111,6 +110,20 @@
       <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog</p>
     </div>
   </footer>
+
+  <!-- Script burger menu -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      const navToggle = document.getElementById("nav-toggle");
+      const mainNav = document.getElementById("main-nav");
+
+      navToggle.addEventListener("click", function(){
+        mainNav.classList.toggle("active");
+      });
+    });
+  </script>
+  
   <script src="script.js"></script>
 </body>
 </html>
+
