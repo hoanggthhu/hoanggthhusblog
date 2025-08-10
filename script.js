@@ -43,10 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // Thêm code tự chèn dòng chữ vào tiêu đề
 document.addEventListener("DOMContentLoaded", () => {
   const messages = {
-    "mo-nang.html": "Mơ Nắng — Hành trình của một sản phẩm",
-    "o-trong-vuon.html": "Nhật ký của mùi hương",
-    "binh-yen.html": "Góc nhỏ chứa những điều bình yên!",
-    "blogs.html": "Danh sách Blogs",
+    "mo-nang.html": "Giặt những giấc mơ rồi phơi dưới nắng",
+    "o-trong-vuon.html": "Nơi mùi hương biết kể chuyện nữa",
+    "binh-yen.html": "Chúc bạn một ngày bình an!",
+    "blogs.html": "Những câu chuyện bên lề ở đây",
     "ve-toi.html": "Đôi dòng về mình"
   };
 
