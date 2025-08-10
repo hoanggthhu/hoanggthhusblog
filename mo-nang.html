@@ -22,24 +22,17 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    .main-nav a {
-      position: relative;
+
+    /* headline subtle pop on load */
+    .category-header .gradient-title {
       display: inline-block;
-      padding: 4px 0;
+      transform-origin: center;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      animation: headlineIn 700ms cubic-bezier(.2,.9,.3,1) forwards 120ms;
     }
-    .main-nav a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      bottom: -2px;
-      left: 0;
-      background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
-      transition: width 0.3s ease;
-    }
-    .main-nav a:hover::after,
-    .main-nav a.active::after {
-      width: 100%;
+    @keyframes headlineIn {
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     /* ===== STYLE CHO TRANG MƠ NẮNG ===== */
@@ -49,6 +42,7 @@
       gap: 1.5rem;
       margin-top: 2rem;
     }
+
     .post-card {
       background: #fff;
       border-radius: 12px;
@@ -56,22 +50,35 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      will-change: transform, opacity;
     }
+
+    /* when JS adds .show we reveal */
+    .post-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .post-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
     }
+
     .post-card img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      transition: transform 0.4s ease, filter 0.4s ease;
+      transition: transform 0.45s cubic-bezier(.2,.9,.3,1), filter 0.3s ease;
+      display: block;
     }
     .post-card:hover img {
-      transform: scale(1.05);
-      filter: brightness(1.05);
+      transform: scale(1.06) translateZ(0);
+      filter: brightness(1.03);
     }
+
     .post-body {
       padding: 1rem 1.25rem;
       flex: 1;
@@ -81,12 +88,13 @@
     .post-body h4 {
       font-family: 'Playfair Display', serif;
       margin: 0 0 0.5rem 0;
-      font-size: 1.1rem;
+      font-size: 1.12rem;
+      line-height: 1.25;
     }
     .post-body .excerpt {
       flex: 1;
       font-size: 0.95rem;
-      color: #444;
+      color: #4c4a48;
       margin-bottom: 0.75rem;
     }
     .post-body .read {
@@ -94,9 +102,19 @@
       color: #6a4caf;
       font-weight: 600;
       font-size: 0.95rem;
+      align-self: flex-start;
+      transition: color .2s ease, transform .08s ease;
     }
     .post-body .read:hover {
       text-decoration: underline;
+      color: #4a2a8b;
+      transform: translateY(-1px);
+    }
+
+    /* subtle divider between cards on small screens */
+    @media (max-width: 520px) {
+      .post-card { box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+      .post-card img { height: 160px; }
     }
 
     /* ===== BURGER MENU ===== */
@@ -104,117 +122,78 @@
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      width: 24px;
-      height: 18px;
+      width: 28px;
+      height: 20px;
       cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
     .burger span {
       display: block;
       height: 3px;
       background: #333;
-      border-radius: 2px;
-      transition: all 0.3s ease;
+      border-radius: 3px;
+      transition: transform 300ms cubic-bezier(.2,.9,.3,1), opacity 200ms ease;
+      width: 100%;
     }
     @media (max-width: 768px) {
-      .burger {
-        display: flex;
-      }
+      .burger { display: inline-flex; }
       .main-nav {
         display: none;
         position: absolute;
         top: 60px;
         right: 20px;
         background: white;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        padding: 1rem;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+        border-radius: 10px;
+        padding: 12px;
+        min-width: 220px;
+        z-index: 1200;
       }
-      .main-nav.open {
-        display: block;
-      }
-      .main-nav ul {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      /* hiệu ứng đổi icon burger khi mở */
+      .main-nav.open { display: block; }
+      .main-nav ul { flex-direction: column; gap: 8px; margin: 0; padding: 4px 0; }
+      .main-nav a { display: block; padding: 8px 12px; border-radius: 8px; }
+      /* burger -> X */
       .burger.active span:nth-child(1) {
-        transform: rotate(45deg) translateY(7px);
+        transform: rotate(45deg) translateY(6px);
       }
-      .burger.active span:nth-child(2) {
-        opacity: 0;
-      }
+      .burger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
       .burger.active span:nth-child(3) {
-        transform: rotate(-45deg) translateY(-7px);
+        transform: rotate(-45deg) translateY(-6px);
       }
     }
-  </style>
 
-  <!-- Browser detect -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var ua = navigator.userAgent;
-      if (/MSIE|Trident/.test(ua)) {
-        var popup = document.createElement("div");
-        popup.style.position = "fixed";
-        popup.style.top = "0";
-        popup.style.left = "0";
-        popup.style.width = "100%";
-        popup.style.height = "100%";
-        popup.style.backgroundColor = "rgba(0,0,0,0.5)";
-        popup.style.display = "flex";
-        popup.style.justifyContent = "center";
-        popup.style.alignItems = "center";
-        popup.style.zIndex = "9999";
-        popup.innerHTML = 
-          <div style="
-            background: #fff;
-            padding: 24px 30px;
-            border-radius: 12px;
-            max-width: 400px;
-            text-align: center;
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-          ">
-            <h2 style="color:#b45309; font-size:1.3rem; margin-bottom:12px;">⚠ Trình duyệt không được hỗ trợ</h2>
-            <p style="color:#444; line-height:1.5; margin-bottom:18px;">
-              Bạn đang dùng một trình duyệt quá cũ.<br>
-              Hãy dùng <strong>Chrome</strong>, <strong>Edge</strong>, <strong>Firefox</strong> hoặc <strong>Safari</strong> để trải nghiệm tốt hơn nhé 💛
-            </p>
-            <button id="closeBrowserNotice" style="
-              padding: 8px 16px;
-              background: linear-gradient(135deg, #f59e0b, #ef4444);
-              color: #fff;
-              border: none;
-              border-radius: 8px;
-              font-weight: 600;
-              cursor: pointer;
-            ">Đã hiểu</button>
-          </div>
-        ;
-        document.body.appendChild(popup);
-        document.getElementById("closeBrowserNotice").addEventListener("click", function(){
-          popup.remove();
-        });
-      }
-    });
-  </script>
+    /* small accessibility focus styles */
+    .burger:focus-visible,
+    .main-nav a:focus {
+      outline: 3px solid rgba(106,76,175,0.14);
+      outline-offset: 3px;
+    }
+
+    /* small helper: stagger appear animation using CSS var set by JS */
+    .post-card {
+      transition-delay: var(--delay, 0ms);
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
+    <div class="container header-inner" style="position:relative;">
+      <a class="brand" href="index.html" aria-label="Về trang chủ">
         <h1 class="gradient-title">Mơ Nắng</h1>
         <p class="tag">Những món đồ mang năng lượng chữa lành</p>
       </a>
 
-      <!-- Burger button -->
-      <div class="burger" id="burger">
+      <!-- Burger button (accessible) -->
+      <button class="burger" id="burger" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
 
-      <nav class="main-nav" id="mainNav">
+      <nav class="main-nav" id="mainNav" aria-hidden="true">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
           <li><a href="mo-nang.html" class="active">Mơ Nắng</a></li>
@@ -233,9 +212,9 @@
       <h2 class="gradient-title">Mơ Nắng — Hành trình của một sản phẩm</h2>
     </section>
 
-    <section class="posts-list">
-      <article class="post-card">
-        <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070e4a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
+    <section class="posts-list" id="postsList">
+      <article class="post-card" data-index="0">
+        <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070e4a?q=80&w=1200" alt="Khăn tay thêu">
         <div class="post-body">
           <h4>Hành trình một chiếc khăn tay từ nét thêu đầu tiên</h4>
           <p class="excerpt">Một bài kể chi tiết về quá trình, vật liệu và cảm xúc khi tạo ra chiếc khăn.</p>
@@ -243,8 +222,8 @@
         </div>
       </article>
 
-      <article class="post-card">
-        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
+      <article class="post-card" data-index="1">
+        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=1200" alt="Mẫu thêu">
         <div class="post-body">
           <h4>5 mẫu thêu mang câu chuyện đặc biệt của Mơ Nắng</h4>
           <p class="excerpt">Mỗi mẫu có một ý tưởng, một ký ức và một thông điệp nhỏ.</p>
@@ -261,32 +240,94 @@
   </footer>
 
   <script>
+    // DOM ready
     document.addEventListener("DOMContentLoaded", function () {
       const burger = document.getElementById("burger");
       const mainNav = document.getElementById("mainNav");
+      const yearEl = document.getElementById("year2");
+      const posts = document.querySelectorAll(".post-card");
 
-      if (burger && mainNav) {
-        burger.addEventListener("click", function () {
-          mainNav.classList.toggle("open");
-          burger.classList.toggle("active");
-        });
+      // Fill year
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-        mainNav.querySelectorAll("a").forEach(link => {
-          link.addEventListener("click", function () {
-            mainNav.classList.remove("open");
-            burger.classList.remove("active");
-          });
-        });
+      // Toggle menu (burger)
+      function openMenu() {
+        mainNav.classList.add("open");
+        burger.classList.add("active");
+        burger.setAttribute("aria-expanded", "true");
+        mainNav.setAttribute("aria-hidden", "false");
+        // trap focus could be added later
+      }
+      function closeMenu() {
+        mainNav.classList.remove("open");
+        burger.classList.remove("active");
+        burger.setAttribute("aria-expanded", "false");
+        mainNav.setAttribute("aria-hidden", "true");
       }
 
-      const yearEl = document.getElementById("year2");
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
+      burger.addEventListener("click", () => {
+        const isOpen = mainNav.classList.contains("open");
+        if (isOpen) closeMenu(); else openMenu();
+      });
+
+      // keyboard support for burger (enter/space)
+      burger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          burger.click();
+        } else if (e.key === "Escape") {
+          closeMenu();
+        }
+      });
+
+      // close when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!mainNav.contains(e.target) && !burger.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      // close on Escape key globally
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+
+      // Close nav when a link is clicked (mobile)
+      mainNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          closeMenu();
+        });
+      });
+
+      // IntersectionObserver to reveal posts with stagger
+      if ('IntersectionObserver' in window && posts.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              // use data-index for stagger; fallback to 0
+              const idx = parseInt(el.dataset.index || "0", 10);
+              el.style.setProperty('--delay', `${idx * 120}ms`);
+              // small timeout to let CSS transition-delay apply
+              setTimeout(() => el.classList.add('show'), idx * 120);
+              observer.unobserve(el);
+            }
+          });
+        }, { threshold: 0.18 });
+
+        posts.forEach((card, i) => {
+          // ensure data-index exists
+          if (!card.dataset.index) card.dataset.index = i;
+          observer.observe(card);
+        });
+      } else {
+        // fallback: just reveal all
+        posts.forEach((c, i) => {
+          c.classList.add('show');
+        });
       }
     });
   </script>
-
-  <script src="script.js"></script>
 </body>
 </html>
 
