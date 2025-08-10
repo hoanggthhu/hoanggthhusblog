@@ -102,6 +102,13 @@ body {
 .main-nav a:hover::after {
   width: 100%;
 }
+/* Active menu underline */
+.main-nav a.active {
+  color: var(--accent2);
+}
+.main-nav a.active::after {
+  width: 100%;
+}
 
 /* Hero */
 .hero { padding: 30px 0; }
@@ -422,5 +429,6 @@ body {
   }
   .three-cards { grid-template-columns: 1fr; gap: 18px; }
 }
+
 
 
