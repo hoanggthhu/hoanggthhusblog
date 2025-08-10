@@ -223,11 +223,20 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Toggle menu script
-    document.getElementById("nav-toggle").addEventListener("click", function() {
-      document.getElementById("main-nav").classList.toggle("active");
+    const navToggle = document.getElementById("nav-toggle");
+    const mainNav = document.getElementById("main-nav");
+
+    navToggle.addEventListener("click", function () {
+      mainNav.classList.toggle("active");
+    });
+
+    mainNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mainNav.classList.remove("active");
+      });
     });
   </script>
 </body>
 </html>
+
 
