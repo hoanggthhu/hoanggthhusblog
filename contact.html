@@ -32,10 +32,8 @@
       background: #fcfcfc; font-size:0.98rem; outline:none;
     }
     textarea { min-height:120px; resize:vertical; }
-    /* Nút dùng class .btn (style.css có gradient via --accent1/2) */
     .btn { display:block; width:100%; padding:12px; border-radius:10px; color:#fff; font-weight:600; border:none; cursor:pointer; text-align:center; }
     .btn:hover { opacity:0.95; }
-    /* giữ responsive */
     @media (max-width:640px){
       .contact-section { margin: 20px; padding:18px; }
     }
@@ -43,7 +41,27 @@
 </head>
 <body>
 
-  <!-- ===== Header (COPY y hệt header trong index.html để CSS áp dụng) ===== -->
+  <!-- Browser Detect -->
+  <script>
+    (function(){
+      let ua = navigator.userAgent;
+      let browser = "Trình duyệt không xác định";
+      if(ua.indexOf("Chrome") !== -1 && ua.indexOf("Edg") === -1 && ua.indexOf("OPR") === -1){
+        browser = "Google Chrome";
+      } else if(ua.indexOf("Firefox") !== -1){
+        browser = "Mozilla Firefox";
+      } else if(ua.indexOf("Safari") !== -1 && ua.indexOf("Chrome") === -1){
+        browser = "Safari";
+      } else if(ua.indexOf("Edg") !== -1){
+        browser = "Microsoft Edge";
+      } else if(ua.indexOf("OPR") !== -1){
+        browser = "Opera";
+      }
+      console.log("Bạn đang dùng:", browser);
+    })();
+  </script>
+
+  <!-- ===== Header ===== -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
@@ -51,9 +69,7 @@
         <p class="tag"> Mình học cách yêu thương</p>
         <p class="tag"> và trưởng thành với một trái tim nguyên vẹn</p>
       </a>
-
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
-
       <nav id="main-nav" class="main-nav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
@@ -67,29 +83,24 @@
       </nav>
     </div>
   </header>
-  <!-- ===== end header ===== -->
 
   <main>
     <section class="contact-section">
       <h2 class="gradient-title">Liên hệ với mình</h2>
       <p class="lead">Nếu bạn muốn nhắn gửi điều gì, điền vào form dưới đây nhé 💌</p>
-
       <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="form-group">
           <label for="name">Họ và tên</label>
           <input id="name" name="name" type="text" placeholder="Nhập tên của bạn" required>
         </div>
-
         <div class="form-group">
           <label for="email">Email</label>
           <input id="email" name="_replyto" type="email" placeholder="Nhập email của bạn" required>
         </div>
-
         <div class="form-group">
           <label for="message">Nội dung tin nhắn</label>
           <textarea id="message" name="message" placeholder="Viết điều bạn muốn chia sẻ..." required></textarea>
         </div>
-
         <button type="submit" class="btn">Gửi tin nhắn</button>
       </form>
     </section>
@@ -100,8 +111,6 @@
       <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog</p>
     </div>
   </footer>
-
-  <!-- script chính (cần cho nav toggle, footer year, v.v.) -->
   <script src="script.js"></script>
 </body>
 </html>
