@@ -153,26 +153,8 @@
     })();
   </script>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <h1 class="gradient-title">Góc bình yên</h1>
-        <p class="tag">Một chút trà, bánh và một câu chuyện</p>
-      </a>
-      <button class="menu-toggle">☰</button>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="index.html">Trang chủ</a></li>
-          <li><a href="mo-nang.html">Mơ Nắng</a></li>
-          <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
-          <li><a href="binh-yen.html" class="active">Góc bình yên</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
-          <li><a href="ve-toi.html">Về mình</a></li>
-          <li><a href="contact.html">Liên lạc</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <!-- Header placeholder -->
+  <div id="header-placeholder"></div>
 
   <main class="container">
     <section class="category-header">
@@ -208,23 +190,27 @@
     </div>
   </footer>
 
-  <!-- Burger menu script -->
+  <!-- Load header and burger menu script -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const toggle = document.querySelector(".menu-toggle");
-      const nav = document.querySelector(".main-nav");
+      fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header-placeholder').innerHTML = data;
 
-      if (toggle && nav) {
-        toggle.addEventListener("click", () => {
-          nav.classList.toggle("nav-open");
-        });
+          const navToggle = document.getElementById('nav-toggle');
+          const mainNav = document.getElementById('main-nav');
 
-        nav.querySelectorAll("a").forEach(link => {
-          link.addEventListener("click", () => {
-            nav.classList.remove("nav-open");
+          navToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('nav-open');
+          });
+
+          mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              mainNav.classList.remove('nav-open');
+            });
           });
         });
-      }
 
       const yearEl = document.getElementById("year4");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -232,6 +218,7 @@
   </script>
 </body>
 </html>
+
 
 
 
