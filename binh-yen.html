@@ -105,6 +105,7 @@
         right: 0;
         width: 200px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 10000;
       }
       .main-nav.nav-open {
         display: flex;
@@ -121,6 +122,11 @@
       .main-nav a {
         display: block;
         padding: 10px;
+      }
+      .main-nav a.active {
+        background-color: #6a4caf;
+        color: white;
+        border-radius: 4px;
       }
     }
   </style>
@@ -210,6 +216,15 @@
               mainNav.classList.remove('nav-open');
             });
           });
+
+          // Sửa class active menu ngay đây, vì header được load động
+          mainNav.querySelectorAll('a').forEach(link => {
+            if(link.getAttribute('href') === 'binh-yen.html'){
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
         });
 
       const yearEl = document.getElementById("year4");
@@ -218,6 +233,7 @@
   </script>
 </body>
 </html>
+
 
 
 
