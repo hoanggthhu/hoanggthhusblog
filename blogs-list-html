@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blogs — Mơ Nắng</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* copy nguyên style từ trang cũ */
+    .gradient-title {
+      background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: gradientFlow 5s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .posts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .post-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      will-change: transform, opacity;
+    }
+    .post-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .post-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .post-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.45s cubic-bezier(.2,.9,.3,1), filter 0.3s ease;
+      display: block;
+    }
+    .post-card:hover img {
+      transform: scale(1.06) translateZ(0);
+      filter: brightness(1.03);
+    }
+    .post-body {
+      padding: 1rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-body h4 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+    .post-body .excerpt {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #4c4a48;
+      margin-bottom: 0.75rem;
+    }
+    .post-body .read {
+      text-decoration: none;
+      color: #6a4caf;
+      font-weight: 600;
+      font-size: 0.95rem;
+      align-self: flex-start;
+      transition: color .2s ease, transform .08s ease;
+    }
+    .post-body .read:hover {
+      text-decoration: underline;
+      color: #4a2a8b;
+      transform: translateY(-1px);
+    }
+    @media (max-width: 520px) {
+      .post-card { box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+      .post-card img { height: 160px; }
+    }
+    /* burger & nav */
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .burger span {
+      display: block;
+      height: 3px;
+      background: #333;
+      border-radius: 3px;
+      transition: transform 300ms cubic-bezier(.2,.9,.3,1), opacity 200ms ease;
+      width: 100%;
+    }
+    @media (max-width: 768px) {
+      .burger { display: inline-flex; }
+      .main-nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: white;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+        border-radius: 10px;
+        padding: 12px;
+        min-width: 220px;
+        z-index: 1200;
+      }
+      .main-nav.open { display: block; }
+      .main-nav ul { flex-direction: column; gap: 8px; margin: 0; padding: 4px 0; }
+      .main-nav a { display: block; padding: 8px 12px; border-radius: 8px; }
+      .burger.active span:nth-child(1) {
+        transform: rotate(45deg) translateY(6px);
+      }
+      .burger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+      .burger.active span:nth-child(3) {
+        transform: rotate(-45deg) translateY(-6px);
+      }
+    }
+    .burger:focus-visible,
+    .main-nav a:focus {
+      outline: 3px solid rgba(106,76,175,0.14);
+      outline-offset: 3px;
+    }
+    .post-card {
+      transition-delay: var(--delay, 0ms);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner" style="position:relative;">
+      <a class="brand" href="index.html" aria-label="Về trang chủ">
+        <h1 class="gradient-title">Mơ Nắng</h1>
+        <p class="tag">Những món đồ mang năng lượng chữa lành</p>
+      </a>
+
+      <!-- Burger button (accessible) -->
+      <button class="burger" id="burger" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-hidden="true">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
+          <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
+          <li><a href="binh-yen.html">Góc bình yên</a></li>
+          <li><a href="blogs-list.html" class="active">Blogs</a></li>
+          <li><a href="ve-toi.html">Về mình</a></li>
+          <li><a href="contact.html">Liên lạc</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="category-header">
+      <h2 class="gradient-title">Blogs của Mơ Nắng</h2>
+    </section>
+
+    <section class="posts-list" id="postsList">
+      <!-- Bài blog sẽ load ở đây bằng JS -->
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year2"></span> Hoàngg Thhư's Blog</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const burger = document.getElementById("burger");
+      const mainNav = document.getElementById("mainNav");
+      const yearEl = document.getElementById("year2");
+      const postsList = document.getElementById("postsList");
+
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Toggle burger menu
+      function openMenu() {
+        mainNav.classList.add("open");
+        burger.classList.add("active");
+        burger.setAttribute("aria-expanded", "true");
+        mainNav.setAttribute("aria-hidden", "false");
+      }
+      function closeMenu() {
+        mainNav.classList.remove("open");
+        burger.classList.remove("active");
+        burger.setAttribute("aria-expanded", "false");
+        mainNav.setAttribute("aria-hidden", "true");
+      }
+      burger.addEventListener("click", () => {
+        const isOpen = mainNav.classList.contains("open");
+        if (isOpen) closeMenu(); else openMenu();
+      });
+      burger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          burger.click();
+        } else if (e.key === "Escape") {
+          closeMenu();
+        }
+      });
+      document.addEventListener("click", (e) => {
+        if (!mainNav.contains(e.target) && !burger.contains(e.target)) closeMenu();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+      mainNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => closeMenu());
+      });
+
+      // Load blogs từ blog.json
+      fetch('blog.json')
+        .then(response => response.json())
+        .then(data => {
+          if (!Array.isArray(data)) return;
+
+          data.forEach((post, index) => {
+            const article = document.createElement('article');
+            article.className = 'post-card';
+            article.dataset.index = index;
+
+            article.innerHTML = `
+              <img src="${post.image}" alt="${post.title}">
+              <div class="post-body">
+                <h4>${post.title}</h4>
+                <p class="excerpt">${post.excerpt}</p>
+                <a href="${post.url}" class="read" target="_blank" rel="noopener noreferrer">Đọc</a>
+              </div>
+            `;
+
+            postsList.appendChild(article);
+          });
+
+          // Animation hiện bài blog
+          const posts = document.querySelectorAll(".post-card");
+          if ('IntersectionObserver' in window && posts.length) {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  const el = entry.target;
+                  const idx = parseInt(el.dataset.index || "0", 10);
+                  el.style.setProperty('--delay', `${idx * 120}ms`);
+                  setTimeout(() => el.classList.add('show'), idx * 120);
+                  observer.unobserve(el);
+                }
+              });
+            }, { threshold: 0.18 });
+            posts.forEach((card, i) => {
+              if (!card.dataset.index) card.dataset.index = i;
+              observer.observe(card);
+            });
+          } else {
+            posts.forEach(c => c.classList.add('show'));
+          }
+        })
+        .catch(err => {
+          console.error('Lỗi tải blog.json:', err);
+          postsList.innerHTML = '<p>Không tải được
