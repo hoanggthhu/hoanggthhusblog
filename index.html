@@ -122,18 +122,39 @@
         display: block;
         color: #333;
       }
-      .main-nav {
+      #main-nav {
         display: none;
+        background: white;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        padding: 10px 0;
       }
-      .main-nav.active {
+      #main-nav.active {
         display: block;
+      }
+      #main-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      #main-nav ul li {
+        text-align: center;
+        margin: 10px 0;
+      }
+      #main-nav ul li a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #333;
       }
     }
   </style>
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="container header-inner" style="position: relative;">
       <a class="brand" href="index.html">
         <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
         <p class="tag"> Mình học cách yêu thương</p>
@@ -209,3 +230,4 @@
   </script>
 </body>
 </html>
+
