@@ -95,3 +95,55 @@ body{
   .main-nav ul{flex-direction:column;gap:6px}
   .three-cards{grid-template-columns:1fr}
 }
+/* === Custom animations & spacing by ChatGPT === */
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card layout spacing */
+.card {
+  display: flex;
+  flex-direction: row;
+  gap: 20px; /* Space between image & text */
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #fff;
+}
+
+/* Card image hover */
+.card img {
+  border-radius: 12px;
+  object-fit: cover;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.card img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Link hover underline animation */
+.card a {
+  position: relative;
+  text-decoration: none;
+}
+.card a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+.card a:hover::after {
+  width: 100%;
+}
