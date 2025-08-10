@@ -40,3 +40,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   elements.forEach(el => observer.observe(el));
 });
+// Thêm code tự chèn dòng chữ vào tiêu đề
+document.addEventListener("DOMContentLoaded", () => {
+  const messages = {
+    "mo-nang.html": "Mơ Nắng — Hành trình của một sản phẩm",
+    "o-trong-vuon.html": "Nhật ký của mùi hương",
+    "binh-yen.html": "Góc nhỏ chứa những điều bình yên!",
+    "blogs.html": "Danh sách Blogs",
+    "ve-toi.html": "Đôi dòng về mình"
+  };
+
+  const currentPage = window.location.pathname.split("/").pop();
+  const text = messages[currentPage];
+
+  if (text) {
+    const categoryHeader = document.querySelector(".category-header h2");
+    if (categoryHeader) {
+      const introDiv = document.createElement("div");
+      introDiv.classList.add("intro-message");
+
+      const h3 = document.createElement("h3");
+      h3.id = "typewriter";
+      introDiv.appendChild(h3);
+
+      categoryHeader.insertAdjacentElement("afterend", introDiv);
+      typeWriterEffect("typewriter", text, 50);
+    }
+  }
+});
+
+function typeWriterEffect(elementId, text, speed) {
+  let i = 0;
+  const el = document.getElementById(elementId);
+  function typing() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
