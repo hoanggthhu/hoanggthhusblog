@@ -217,7 +217,7 @@
       <nav class="main-nav" id="mainNav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
-          <li><a href="mo-nang.html" class="active">Mơ Nắng</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
           <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
           <li><a href="binh-yen.html">Góc bình yên</a></li>
           <li><a href="blogs.html">Blogs</a></li>
@@ -260,34 +260,9 @@
     </div>
   </footer>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const burger = document.getElementById("burger");
-      const mainNav = document.getElementById("mainNav");
-
-      if (burger && mainNav) {
-        burger.addEventListener("click", function () {
-          mainNav.classList.toggle("open");
-          burger.classList.toggle("active");
-        });
-
-        mainNav.querySelectorAll("a").forEach(link => {
-          link.addEventListener("click", function () {
-            mainNav.classList.remove("open");
-            burger.classList.remove("active");
-          });
-        });
-      }
-
-      const yearEl = document.getElementById("year2");
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-      }
-    });
-  </script>
-
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
