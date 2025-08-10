@@ -11,25 +11,45 @@
   <link rel="stylesheet" href="style.css">
   
   <style>
-    body { background: linear-gradient(135deg, #f9f9f9, #f5f1ee); }
+    body { 
+      background: linear-gradient(135deg, #fdfcfb, #f3f0ec); 
+      font-family: 'Inter', sans-serif;
+      animation: fadeIn 0.6s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .gradient-title {
+      background: linear-gradient(90deg, #6a4caf, #ff8a65);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
     .contact-section {
       max-width: 650px;
       margin: 48px auto;
-      padding: 26px;
+      padding: 28px;
       background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.7s ease-out forwards;
+    }
+    @keyframes slideUp {
+      to { transform: translateY(0); opacity: 1; }
     }
     .contact-section h2 {
       text-align: center;
       margin-bottom: 8px;
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-size: 1.9rem;
     }
     .contact-section p.lead {
       text-align: center;
       color: #666;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .form-group { margin-bottom: 14px; }
     label { 
@@ -40,12 +60,25 @@
     }
     input[type="text"], input[type="email"], textarea {
       width: 100%;
-      padding: 10px 12px;
+      padding: 12px 14px;
       border-radius: 8px;
       border: 1px solid #ddd;
       background: #fcfcfc;
       font-size: 0.98rem;
       outline: none;
+      transition: all 0.25s ease;
+    }
+    input:focus, textarea:focus {
+      border-color: #c084fc;
+      box-shadow: 0 0 6px rgba(192,132,252,0.4);
+      background: #fff;
+    }
+    ::placeholder {
+      opacity: 0.7;
+      transition: opacity 0.25s ease;
+    }
+    input:focus::placeholder, textarea:focus::placeholder {
+      opacity: 0.3;
     }
     textarea { min-height: 120px; resize: vertical; }
 
@@ -59,22 +92,27 @@
       border: none;
       cursor: pointer;
       text-align: center;
+      font-size: 1rem;
       background: linear-gradient(135deg, var(--accent1, #f59e0b), var(--accent2, #ef4444));
       transition: all 0.3s ease;
     }
-    .btn:hover { opacity: 0.95; }
+    .btn:hover { transform: translateY(-1px); opacity: 0.95; }
 
-    /* Success */
+    /* Success pulse */
     .btn.success {
       background: #22c55e !important;
+      animation: pulse 0.8s ease-in-out 2;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
-    /* Error */
+    /* Error shake */
     .btn.error {
       background: #ef4444 !important;
       animation: shake 0.4s;
     }
-
     @keyframes shake {
       0% { transform: translateX(0); }
       25% { transform: translateX(-4px); }
@@ -88,8 +126,8 @@
       font-weight: 600;
       text-align: center;
     }
-    .success-text { color: green; }
-    .error-text { color: red; }
+    .success-text { color: #16a34a; }
+    .error-text { color: #dc2626; }
     
     @media (max-width:640px) {
       .contact-section { margin: 20px; padding: 18px; }
@@ -124,7 +162,7 @@
   <!-- Main Content -->
   <main>
     <section class="contact-section">
-      <h2 class="gradient-title">Liên hệ với mình</h2>
+      <h2 class="gradient-title">📬 Liên hệ với mình</h2>
       <p class="lead">Nếu bạn muốn nhắn gửi điều gì, điền vào form dưới đây nhé 💌</p>
       <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="form-group">
@@ -139,7 +177,7 @@
           <label for="message">Nội dung tin nhắn</label>
           <textarea id="message" name="message" placeholder="Viết điều bạn muốn chia sẻ..." required></textarea>
         </div>
-        <button type="submit" class="btn">Gửi tin nhắn</button>
+        <button type="submit" class="btn">📩 Gửi tin nhắn</button>
         <div id="form-message" class="form-message"></div>
       </form>
     </section>
@@ -161,7 +199,6 @@
       const formMessage = document.getElementById("form-message");
       const submitBtn = form.querySelector(".btn");
 
-      // Burger menu
       if (navToggle && mainNav) {
         navToggle.addEventListener("click", () => mainNav.classList.toggle("active"));
         mainNav.querySelectorAll("a").forEach(link => {
@@ -169,10 +206,8 @@
         });
       }
 
-      // Hiển thị năm
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // Submit form AJAX
       if (form) {
         form.addEventListener("submit", function(e){
           e.preventDefault();
@@ -203,7 +238,7 @@
             setTimeout(() => {
               submitBtn.disabled = false;
               submitBtn.classList.remove("success", "error");
-              submitBtn.textContent = "Gửi tin nhắn";
+              submitBtn.textContent = "📩 Gửi tin nhắn";
             }, 2000);
           });
         });
@@ -212,6 +247,5 @@
   </script>
 </body>
 </html>
-
 
 
