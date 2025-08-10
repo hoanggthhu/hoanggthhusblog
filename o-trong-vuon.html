@@ -8,12 +8,19 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Hiệu ứng chữ gradient */
+    /* Hiệu ứng chữ gradient động */
     .gradient-title {
-      background: linear-gradient(90deg, #6a4caf, #ff8a65);
+      background: linear-gradient(270deg, #6a4caf, #ff8a65, #6a4caf);
+      background-size: 600% 600%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
+      animation: gradientMove 8s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* Hover underline cho menu */
@@ -50,24 +57,27 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
     }
-
+    .post-card.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
     .post-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
     }
 
     .post-card img {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      transition: transform 0.4s ease, filter 0.4s ease;
+      transition: transform 0.6s ease, filter 0.4s ease;
     }
-
     .post-card:hover img {
-      transform: scale(1.05);
-      filter: brightness(1.05);
+      transform: scale(1.08) rotate(1deg);
+      filter: brightness(1.07);
     }
 
     .post-body {
@@ -76,29 +86,26 @@
       display: flex;
       flex-direction: column;
     }
-
     .post-body h4 {
       font-family: 'Playfair Display', serif;
       margin: 0 0 0.5rem 0;
       font-size: 1.1rem;
     }
-
     .post-body .excerpt {
       flex: 1;
       font-size: 0.95rem;
       color: #444;
       margin-bottom: 0.75rem;
     }
-
     .post-body .read {
       text-decoration: none;
       color: #6a4caf;
       font-weight: 600;
       font-size: 0.95rem;
+      transition: color 0.3s ease;
     }
-
     .post-body .read:hover {
-      text-decoration: underline;
+      color: #ff8a65;
     }
 
     /* Burger icon */
@@ -113,6 +120,16 @@
       width: 25px;
       height: 3px;
       background: #333;
+      transition: transform 0.3s ease;
+    }
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
     }
 
     @media (max-width: 768px) {
@@ -125,10 +142,17 @@
         top: 60px;
         right: 10px;
         padding: 10px;
+        border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         z-index: 1000;
+        animation: fadeIn 0.3s ease;
       }
       .main-nav.active { display: flex; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -195,33 +219,43 @@
     document.addEventListener('DOMContentLoaded', function () {
       const burger = document.getElementById('burger');
       const nav = document.getElementById('mainNav');
+      const cards = document.querySelectorAll('.post-card');
 
       // Toggle menu
       burger.addEventListener('click', function (e) {
-        e.stopPropagation(); // tránh click lan ra ngoài
+        e.stopPropagation();
         nav.classList.toggle('active');
+        burger.classList.toggle('active');
       });
 
       // Đóng menu khi click ra ngoài
       document.addEventListener('click', function (e) {
         if (!burger.contains(e.target) && !nav.contains(e.target)) {
           nav.classList.remove('active');
+          burger.classList.remove('active');
         }
       });
 
-      // Đóng menu khi bấm link trong menu (mobile UX)
-      nav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', function () {
-          nav.classList.remove('active');
+      // Scroll reveal hiệu ứng
+      function revealOnScroll() {
+        const triggerBottom = window.innerHeight * 0.85;
+        cards.forEach(card => {
+          const cardTop = card.getBoundingClientRect().top;
+          if (cardTop < triggerBottom) {
+            card.classList.add('show');
+          }
         });
-      });
+      }
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll();
 
-      // Hiển thị năm tự động
+      // Năm tự động
       document.getElementById('year3').textContent = new Date().getFullYear();
     });
   </script>
 </body>
 </html>
+
 
 
 
