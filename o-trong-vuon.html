@@ -107,6 +107,7 @@
       flex-direction: column;
       gap: 4px;
       cursor: pointer;
+      z-index: 1001;
     }
     .burger span {
       width: 25px;
@@ -125,6 +126,7 @@
         right: 10px;
         padding: 10px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 1000;
       }
       .main-nav.active { display: flex; }
     }
@@ -195,6 +197,15 @@
       document.getElementById('mainNav').classList.toggle('active');
     });
 
+    // Đóng menu khi click ra ngoài
+    document.addEventListener('click', function(e) {
+      const burger = document.getElementById('burger');
+      const nav = document.getElementById('mainNav');
+      if (!burger.contains(e.target) && !nav.contains(e.target)) {
+        nav.classList.remove('active');
+      }
+    });
+
     // Browser detect
     (function() {
       const isOldBrowser = !('querySelector' in document && 'addEventListener' in window);
@@ -208,5 +219,6 @@
   </script>
 </body>
 </html>
+
 
 
