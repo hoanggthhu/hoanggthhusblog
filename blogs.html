@@ -3,23 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blogs — Hoàngg Thhư's Blog</title>
-  <meta name="description" content="Danh sách bài viết — Hoàngg Thhư's Blog">
+  <title>Blogs — Danh sách bài viết</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Danh sách bài viết — Góc một chút bình yên">
 </head>
 <body>
-  <!-- Header đồng bộ -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
         <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
-        <p class="tag">Mình học cách yêu thương</p>
-        <p class="tag">và trưởng thành với một trái tim vẹn nguyên</p>
+        <p class="tag">Mình học cách yêu thương và trưởng thành</p>
+        <p class="tag">với một trái tim nguyên vẹn</p>
       </a>
-
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
-
       <nav id="main-nav" class="main-nav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
@@ -36,7 +33,7 @@
 
   <main>
     <section class="container posts-preview">
-      <h2 class="section-title">Danh sách Blogs</h2>
+      <h2 class="section-title gradient-title">Danh sách Blogs</h2>
       <p class="lead">Những mẩu chuyện nhỏ, mảnh vườn và vài lát yên — chọn bài bạn muốn đọc nhé.</p>
 
       <div class="posts-grid">
@@ -77,6 +74,30 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- Browser Detect -->
+  <script>
+    (function() {
+      const ua = navigator.userAgent;
+      let browserName = "Không xác định";
+
+      if (/chrome|crios|crmo/i.test(ua) && !/edge|edg/i.test(ua)) {
+        browserName = "Google Chrome";
+      } else if (/firefox|fxios/i.test(ua)) {
+        browserName = "Mozilla Firefox";
+      } else if (/safari/i.test(ua) && !/chrome|crios/i.test(ua)) {
+        browserName = "Safari";
+      } else if (/edg/i.test(ua)) {
+        browserName = "Microsoft Edge";
+      } else if (/msie|trident/i.test(ua)) {
+        browserName = "Internet Explorer";
+      }
+
+      if (browserName === "Safari" || browserName === "Internet Explorer") {
+        alert(`Bạn đang dùng ${browserName}. Một số hiệu ứng có thể hiển thị khác trên trình duyệt này.`);
+      }
+      console.log("Trình duyệt của bạn:", browserName);
+    })();
+  </script>
 </body>
 </html>
-
