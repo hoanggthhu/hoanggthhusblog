@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* copy nguyên style từ trang cũ */
+    /* ===== HIỆU ỨNG CHỮ ĐỒNG BỘ ===== */
     .gradient-title {
       background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
       background-size: 200% auto;
@@ -22,12 +22,26 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
+    /* headline subtle pop on load */
+    .category-header .gradient-title {
+      display: inline-block;
+      transform-origin: center;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      animation: headlineIn 700ms cubic-bezier(.2,.9,.3,1) forwards 120ms;
+    }
+    @keyframes headlineIn {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
     .posts-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
+
     .post-card {
       background: #fff;
       border-radius: 12px;
@@ -40,14 +54,17 @@
       transform: translateY(30px);
       will-change: transform, opacity;
     }
+
     .post-card.show {
       opacity: 1;
       transform: translateY(0);
     }
+
     .post-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.08);
     }
+
     .post-card img {
       width: 100%;
       height: 200px;
@@ -59,6 +76,7 @@
       transform: scale(1.06) translateZ(0);
       filter: brightness(1.03);
     }
+
     .post-body {
       padding: 1rem 1.25rem;
       flex: 1;
@@ -90,63 +108,29 @@
       color: #4a2a8b;
       transform: translateY(-1px);
     }
-    @media (max-width: 520px) {
-      .post-card { box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
-      .post-card img { height: 160px; }
+
+    /* Search input style */
+    .search-container {
+      text-align: right;
+      margin-top: 1rem;
     }
-    /* burger & nav */
-    .burger {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 28px;
-      height: 20px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .burger span {
-      display: block;
-      height: 3px;
-      background: #333;
-      border-radius: 3px;
-      transition: transform 300ms cubic-bezier(.2,.9,.3,1), opacity 200ms ease;
+    .search-container input {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      max-width: 300px;
       width: 100%;
+      transition: box-shadow 0.3s ease;
     }
-    @media (max-width: 768px) {
-      .burger { display: inline-flex; }
-      .main-nav {
-        display: none;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background: white;
-        box-shadow: 0 8px 28px rgba(0,0,0,0.12);
-        border-radius: 10px;
-        padding: 12px;
-        min-width: 220px;
-        z-index: 1200;
-      }
-      .main-nav.open { display: block; }
-      .main-nav ul { flex-direction: column; gap: 8px; margin: 0; padding: 4px 0; }
-      .main-nav a { display: block; padding: 8px 12px; border-radius: 8px; }
-      .burger.active span:nth-child(1) {
-        transform: rotate(45deg) translateY(6px);
-      }
-      .burger.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
-      .burger.active span:nth-child(3) {
-        transform: rotate(-45deg) translateY(-6px);
-      }
+    .search-container input:focus {
+      outline-color: #6a4caf;
+      box-shadow: 0 0 5px #6a4cafaa;
     }
-    .burger:focus-visible,
-    .main-nav a:focus {
-      outline: 3px solid rgba(106,76,175,0.14);
-      outline-offset: 3px;
-    }
-    .post-card {
-      transition-delay: var(--delay, 0ms);
+
+    /* responsive */
+    @media (max-width: 520px) {
+      .post-card img { height: 160px; }
     }
   </style>
 </head>
@@ -158,7 +142,6 @@
         <p class="tag">Những món đồ mang năng lượng chữa lành</p>
       </a>
 
-      <!-- Burger button (accessible) -->
       <button class="burger" id="burger" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
         <span></span>
         <span></span>
@@ -184,8 +167,18 @@
       <h2 class="gradient-title">Blogs của Mơ Nắng</h2>
     </section>
 
+    <!-- Search input -->
+    <section class="search-container">
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Tìm blog..."
+        aria-label="Tìm blog"
+      >
+    </section>
+
     <section class="posts-list" id="postsList">
-      <!-- Bài blog sẽ load ở đây bằng JS -->
+      <!-- Blog posts sẽ load bằng JS -->
     </section>
   </main>
 
@@ -201,8 +194,6 @@
       const mainNav = document.getElementById("mainNav");
       const yearEl = document.getElementById("year2");
       const postsList = document.getElementById("postsList");
-
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       // Toggle burger menu
       function openMenu() {
@@ -230,41 +221,44 @@
         }
       });
       document.addEventListener("click", (e) => {
-        if (!mainNav.contains(e.target) && !burger.contains(e.target)) closeMenu();
+        if (!mainNav.contains(e.target) && !burger.contains(e.target)) {
+          closeMenu();
+        }
       });
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeMenu();
       });
       mainNav.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => closeMenu());
+        link.addEventListener("click", () => {
+          closeMenu();
+        });
       });
 
-      // Load blogs từ blog.json
-      fetch('blog.json')
-        .then(response => response.json())
-        .then(data => {
-          if (!Array.isArray(data)) return;
+      // Fill year in footer
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-          data.forEach((post, index) => {
+      // Load blog posts from JSON
+      fetch('blog.json')
+        .then(res => res.json())
+        .then(posts => {
+          posts.forEach((post, i) => {
             const article = document.createElement('article');
             article.className = 'post-card';
-            article.dataset.index = index;
-
+            article.dataset.index = i;
             article.innerHTML = `
               <img src="${post.image}" alt="${post.title}">
               <div class="post-body">
                 <h4>${post.title}</h4>
                 <p class="excerpt">${post.excerpt}</p>
-                <a href="${post.url}" class="read" target="_blank" rel="noopener noreferrer">Đọc</a>
+                <a href="${post.url}" class="read">Đọc</a>
               </div>
             `;
-
             postsList.appendChild(article);
           });
 
-          // Animation hiện bài blog
-          const posts = document.querySelectorAll(".post-card");
-          if ('IntersectionObserver' in window && posts.length) {
+          // IntersectionObserver để hiện animation bài viết
+          const postCards = document.querySelectorAll('.post-card');
+          if ('IntersectionObserver' in window && postCards.length) {
             const observer = new IntersectionObserver((entries) => {
               entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -276,17 +270,26 @@
                 }
               });
             }, { threshold: 0.18 });
-            posts.forEach((card, i) => {
-              if (!card.dataset.index) card.dataset.index = i;
-              observer.observe(card);
-            });
+            postCards.forEach(card => observer.observe(card));
           } else {
-            posts.forEach(c => c.classList.add('show'));
+            postCards.forEach(c => c.classList.add('show'));
           }
+
+          // Search blog filter
+          const searchInput = document.getElementById('searchInput');
+          searchInput.addEventListener('input', () => {
+            const term = searchInput.value.toLowerCase();
+            postCards.forEach(post => {
+              const title = post.querySelector('h4').textContent.toLowerCase();
+              const excerpt = post.querySelector('.excerpt').textContent.toLowerCase();
+              const match = title.includes(term) || excerpt.includes(term);
+              post.style.display = match ? '' : 'none';
+            });
+          });
         })
         .catch(err => {
+          postsList.innerHTML = '<p>Không thể tải danh sách blog.</p>';
           console.error('Lỗi tải blog.json:', err);
-          postsList.innerHTML = '<p>Không tải được danh sách blog.</p>';
         });
     });
   </script>
