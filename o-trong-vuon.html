@@ -6,7 +6,36 @@
   <title>Ở Trong Vườn — Hương liệu & cây cỏ</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
   <style>
+    /* Hiệu ứng chữ gradient */
+    .gradient-title {
+      background: linear-gradient(90deg, #6a4caf, #ff8a65);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Hover underline cho menu */
+    .main-nav a {
+      position: relative;
+      text-decoration: none;
+    }
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+    .main-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Danh sách bài viết */
     .posts-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -127,6 +156,18 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Browser detect
+    (function() {
+      const isOldBrowser = !('querySelector' in document && 'addEventListener' in window);
+      if (isOldBrowser) {
+        alert('Trình duyệt của bạn quá cũ. Vui lòng nâng cấp để trải nghiệm tốt nhất.');
+      }
+    })();
+
+    // Hiển thị năm tự động
+    document.getElementById('year3').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
