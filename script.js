@@ -1,18 +1,21 @@
 document.addEventListener('DOMContentLoaded', function(){
-  const toggle = document.getElementById('nav-toggle');
-  const nav = document.getElementById('main-nav');
-  if(toggle && nav){
-    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  // === Toggle menu ===
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", function() {
+      navLinks.classList.toggle("active");
+    });
   }
 
-  // year filler
+  // === Year filler ===
   const years = [ 'year','year2','year3','year4','year5','year6' ];
   years.forEach(id => {
     const el = document.getElementById(id);
     if(el) el.textContent = new Date().getFullYear();
   });
 
-  // typing effect
+  // === Typing effect ===
   const typingEl = document.querySelector('.typing');
   if(typingEl){
     const text = typingEl.getAttribute('data-text') || '';
@@ -26,9 +29,8 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     type();
   }
-});
-// === Fade-in on scroll ===
-document.addEventListener("DOMContentLoaded", () => {
+
+  // === Fade-in on scroll ===
   const elements = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -37,11 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }, { threshold: 0.1 });
-
   elements.forEach(el => observer.observe(el));
-});
-// Thêm code tự chèn dòng chữ vào tiêu đề
-document.addEventListener("DOMContentLoaded", () => {
+
+  // === Auto intro text by page ===
   const messages = {
     "mo-nang.html": "Giặt những giấc mơ rồi phơi dưới nắng",
     "o-trong-vuon.html": "Nơi mùi hương biết kể chuyện",
@@ -49,10 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "blogs.html": "Dừng lại để nghe những câu chuyện bên lề ở đây",
     "ve-toi.html": "Đôi dòng về mình"
   };
-
   const currentPage = window.location.pathname.split("/").pop();
   const text = messages[currentPage];
-
   if (text) {
     const categoryHeader = document.querySelector(".category-header h2");
     if (categoryHeader) {
@@ -69,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// === Typewriter effect function ===
 function typeWriterEffect(elementId, text, speed) {
   let i = 0;
   const el = document.getElementById(elementId);
@@ -81,13 +80,4 @@ function typeWriterEffect(elementId, text, speed) {
   }
   typing();
 }
-document.addEventListener("DOMContentLoaded", function() {
-  const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
 
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener("click", function() {
-      navLinks.classList.toggle("active");
-    });
-  }
-});
