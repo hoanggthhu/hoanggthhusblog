@@ -338,12 +338,75 @@ body{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* === UNIFIED MOBILE NAV FIXES (important) ===
+   - Covers multiple selectors/scripts so burger works reliably
+   - Keep this block last (overrides earlier mobile rules)
+*/
+.header-inner{position:relative !important;}
+
+/* hide various toggle elements by default (desktop) */
+#nav-toggle, .menu-toggle, .burger { display: none; }
+
+/* unified mobile behavior */
 @media (max-width: 768px) {
-  .nav-links {
+
+  /* show toggle buttons */
+  #nav-toggle, .menu-toggle, .burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    z-index: 1200;
+  }
+
+  /* hide navs by default on mobile (supports multiple naming conventions) */
+  .main-nav, #main-nav, .site-nav, .nav-links {
     display: none;
-    flex-direction: column;
+    position: absolute;
+    right: 16px;
+    top: 64px;
+    background: var(--paper);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    width: calc(100% - 32px);
+    max-width: 360px;
+    z-index: 1100;
   }
-  .nav-links.active {
+
+  /* when JS toggles any of these class names, show the menu */
+  .main-nav.active,
+  .main-nav.open,
+  #main-nav.active,
+  #main-nav.open,
+  .site-nav.active,
+  .nav-links.active,
+  .main-nav.nav-open {
+    display: block;
+  }
+
+  /* ensure vertical list look */
+  .main-nav ul, #main-nav ul, .site-nav ul, .nav-links ul {
     display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
+
+  .main-nav a, #main-nav a, .site-nav a, .nav-links a {
+    display: block;
+    padding: 10px 12px;
+    color: var(--muted);
+    border-radius: 8px;
+  }
+
+  /* small-screen layout tweaks */
+  .three-cards { grid-template-columns: 1fr; gap: 18px; }
 }
+
