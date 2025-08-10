@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blogs — Mơ Nắng</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===== HIỆU ỨNG CHỮ ĐỒNG BỘ ===== */
+    .gradient-title {
+      background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: gradientFlow 5s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* headline subtle pop on load */
+    .category-header .gradient-title {
+      display: inline-block;
+      transform-origin: center;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+      animation: headlineIn 700ms cubic-bezier(.2,.9,.3,1) forwards 120ms;
+    }
+    @keyframes headlineIn {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ===== STYLE CHO TRANG BLOGS ===== */
+    .search-container {
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    .search-input {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #6a4caf;
+      border-radius: 20px;
+      width: 250px;
+      max-width: 100%;
+      transition: border-color 0.3s ease;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    .search-input::placeholder {
+      color: #888;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: #4a2a8b;
+      box-shadow: 0 0 8px rgba(74,42,139,0.6);
+    }
+
+    .posts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 0;
+    }
+
+    .post-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      will-change: transform, opacity;
+    }
+
+    /* when JS adds .show we reveal */
+    .post-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .post-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .post-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.45s cubic-bezier(.2,.9,.3,1), filter 0.3s ease;
+      display: block;
+    }
+    .post-card:hover img {
+      transform: scale(1.06) translateZ(0);
+      filter: brightness(1.03);
+    }
+
+    .post-body {
+      padding: 1rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-body h4 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+    .post-body .excerpt {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #4c4a48;
+      margin-bottom: 0.75rem;
+    }
+    .post-body .read {
+      text-decoration: none;
+      color: #6a4caf;
+      font-weight: 600;
+      font-size: 0.95rem;
+      align-self: flex-start;
+      transition: color .2s ease, transform .08s ease;
+    }
+    .post-body .read:hover {
+      text-decoration: underline;
+      color: #4a2a8b;
+      transform: translateY(-1px);
+    }
+
+    /* responsive */
+    @media (max-width: 520px) {
+      .post-card { box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+      .post-card img { height: 160px; }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner" style="position:relative;">
+      <a class="brand" href="index.html" aria-label="Về trang chủ">
+        <h1 class="gradient-title">Mơ Nắng</h1>
+        <p class="tag">Những món đồ mang năng lượng chữa lành</p>
+      </a>
+
+      <!-- Burger button (accessible) -->
+      <button class="burger" id="burger" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-hidden="true">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
+          <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
+          <li><a href="binh-yen.html">Góc bình yên</a></li>
+          <li><a href="blogs-search.html" class="active">Blogs</a></li>
+          <li><a href="ve-toi.html">Về mình</a></li>
+          <li><a href="contact.html">Liên lạc</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="category-header">
+      <h2 class="gradient-title">Blogs</h2>
+    </section>
+
+    <section class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Tìm blog..." aria-label="Tìm blog" />
+    </section>
+
+    <section class="posts-list" id="postsList">
+      <!-- Các bài blog sẽ được render ở đây -->
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year2"></span> Hoàngg Thhư's Blog</p>
+    </div>
+  </footer>
+
+  <script>
+    // Dữ liệu blog từ file JSON (hoặc copy trực tiếp đây)
+    const blogsData = [
+      {
+        "title": "Hành trình một chiếc khăn tay từ nét thêu đầu tiên",
+        "excerpt": "Một bài kể chi tiết về quá trình, vật liệu và cảm xúc khi tạo ra chiếc khăn.",
+        "image": "https://raw.githubusercontent.com/hoanggthhu/hoanggthhusblog/refs/heads/main/Untitled-2-01-01.png?q=80&w=1200",
+        "url": "blog-post-1.html"
+      },
+      {
+        "title": "5 mẫu thêu mang câu chuyện đặc biệt của Mơ Nắng",
+        "excerpt": "Mỗi mẫu có một ý tưởng, một ký ức và một thông điệp nhỏ.",
+        "image": "https://raw.githubusercontent.com/hoanggthhu/hoanggthhusblog/refs/heads/main/Rostrum.png?q=80&w=1200",
+        "url": "blog-post-2.html"
+      }
+      // Thêm blog mới ở đây
+    ];
+
+    const postsList = document.getElementById("postsList");
+    const searchInput = document.getElementById("searchInput");
+
+    // Hàm tạo thẻ bài blog
+    function createPostCard(blog, index) {
+      const article = document.createElement("article");
+      article.className = "post-card";
+      article.dataset.index = index;
+
+      article.innerHTML = `
+        <img src="${blog.image}" alt="${blog.title}">
+        <div class="post-body">
+          <h4>${blog.title}</h4>
+          <p class="excerpt">${blog.excerpt}</p>
+          <a href="${blog.url}" class="read">Đọc</a>
+        </div>
+      `;
+      return article;
+    }
+
+    // Hàm render tất cả blog hoặc theo tìm kiếm
+    function renderBlogs(filterText = "") {
+      postsList.innerHTML = "";
+      const filtered = blogsData.filter(blog =>
+        blog.title.toLowerCase().includes(filterText.toLowerCase()) ||
+        blog.excerpt.toLowerCase().includes(filterText.toLowerCase())
+      );
+
+      if(filtered.length === 0){
+        postsList.innerHTML = `<p>Không tìm thấy kết quả phù hợp.</p>`;
+        return;
+      }
+
+      filtered.forEach((blog, idx) => {
+        const postCard = createPostCard(blog, idx);
+        postsList.appendChild(postCard);
+
+        // Trigger hiệu ứng hiện khi load
+        setTimeout(() => postCard.classList.add("show"), idx * 120);
+      });
+    }
+
+    // DOM ready
+    document.addEventListener("DOMContentLoaded", function () {
+      const burger = document.getElementById("burger");
+      const mainNav = document.getElementById("mainNav");
+      const yearEl = document.getElementById("year2");
+
+      // Fill year
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Toggle menu (burger)
+      function openMenu() {
+        mainNav.classList.add("open");
+        burger.classList.add("active");
+        burger.setAttribute("aria-expanded", "true");
+        mainNav.setAttribute("aria-hidden", "false");
+      }
+      function closeMenu() {
+        mainNav.classList.remove("open");
+        burger.classList.remove("active");
+        burger.setAttribute("aria-expanded", "false");
+        mainNav.setAttribute("aria-hidden", "true");
+      }
+
+      burger.addEventListener("click", () => {
+        const isOpen = mainNav.classList.contains("open");
+        if (isOpen) closeMenu(); else openMenu();
+      });
+
+      burger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          burger.click();
+        } else if (e.key === "Escape") {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!mainNav.contains(e.target) && !burger.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+
+      mainNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          closeMenu();
+        });
+      });
+
+      // Render ban đầu
+      renderBlogs();
+
+      // Tìm kiếm realtime
+      searchInput.addEventListener("input", (e) => {
+        renderBlogs(e.target.value);
+      });
+    });
+  </script>
+</body>
+</html>
