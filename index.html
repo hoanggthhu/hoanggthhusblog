@@ -121,15 +121,17 @@
       #nav-toggle {
         display: block;
         color: #333;
+        z-index: 10001;
       }
       #main-nav {
         display: none;
         background: white;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 60px; /* bằng chiều cao header */
         right: 0;
         left: 0;
         padding: 10px 0;
+        z-index: 10000;
       }
       #main-nav.active {
         display: block;
@@ -149,6 +151,12 @@
         text-decoration: none;
         color: #333;
       }
+    }
+
+    /* Chặn scroll khi menu mở */
+    .no-scroll {
+      overflow: hidden;
+      height: 100%;
     }
   </style>
 </head>
@@ -228,15 +236,18 @@
 
     navToggle.addEventListener("click", function () {
       mainNav.classList.toggle("active");
+      document.body.classList.toggle("no-scroll");
     });
 
     mainNav.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         mainNav.classList.remove("active");
+        document.body.classList.remove("no-scroll");
       });
     });
   </script>
 </body>
 </html>
+
 
 
