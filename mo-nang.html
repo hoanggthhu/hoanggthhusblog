@@ -6,15 +6,49 @@
   <title>Mơ Nắng — Những món đồ mang năng lượng chữa lành</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
   <style>
-    /* ===== STYLE BỔ SUNG CHO TRANG MƠ NẮNG ===== */
+    /* ===== HIỆU ỨNG CHỮ ĐỒNG BỘ ===== */
+    .gradient-title {
+      background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: gradientFlow 5s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .main-nav a {
+      position: relative;
+      display: inline-block;
+      padding: 4px 0;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
+      transition: width 0.3s ease;
+    }
+    .main-nav a:hover::after,
+    .main-nav a.active::after {
+      width: 100%;
+    }
+
+    /* ===== STYLE CHO TRANG MƠ NẮNG ===== */
     .posts-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
-
     .post-card {
       background: #fff;
       border-radius: 12px;
@@ -24,55 +58,97 @@
       flex-direction: column;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .post-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
-
     .post-card img {
       width: 100%;
       height: 200px;
       object-fit: cover;
       transition: transform 0.4s ease, filter 0.4s ease;
     }
-
     .post-card:hover img {
       transform: scale(1.05);
       filter: brightness(1.05);
     }
-
     .post-body {
       padding: 1rem 1.25rem;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
-
     .post-body h4 {
       font-family: 'Playfair Display', serif;
       margin: 0 0 0.5rem 0;
       font-size: 1.1rem;
     }
-
     .post-body .excerpt {
       flex: 1;
       font-size: 0.95rem;
       color: #444;
       margin-bottom: 0.75rem;
     }
-
     .post-body .read {
       text-decoration: none;
       color: #6a4caf;
       font-weight: 600;
       font-size: 0.95rem;
     }
-
     .post-body .read:hover {
       text-decoration: underline;
     }
   </style>
+
+  <!-- Browser detect -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var ua = navigator.userAgent;
+      if (/MSIE|Trident/.test(ua)) {
+        var popup = document.createElement("div");
+        popup.style.position = "fixed";
+        popup.style.top = "0";
+        popup.style.left = "0";
+        popup.style.width = "100%";
+        popup.style.height = "100%";
+        popup.style.backgroundColor = "rgba(0,0,0,0.5)";
+        popup.style.display = "flex";
+        popup.style.justifyContent = "center";
+        popup.style.alignItems = "center";
+        popup.style.zIndex = "9999";
+        popup.innerHTML = `
+          <div style="
+            background: #fff;
+            padding: 24px 30px;
+            border-radius: 12px;
+            max-width: 400px;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+          ">
+            <h2 style="color:#b45309; font-size:1.3rem; margin-bottom:12px;">⚠ Trình duyệt không được hỗ trợ</h2>
+            <p style="color:#444; line-height:1.5; margin-bottom:18px;">
+              Bạn đang dùng một trình duyệt quá cũ.<br>
+              Hãy dùng <strong>Chrome</strong>, <strong>Edge</strong>, <strong>Firefox</strong> hoặc <strong>Safari</strong> để trải nghiệm tốt hơn nhé 💛
+            </p>
+            <button id="closeBrowserNotice" style="
+              padding: 8px 16px;
+              background: linear-gradient(135deg, #f59e0b, #ef4444);
+              color: #fff;
+              border: none;
+              border-radius: 8px;
+              font-weight: 600;
+              cursor: pointer;
+            ">Đã hiểu</button>
+          </div>
+        `;
+        document.body.appendChild(popup);
+        document.getElementById("closeBrowserNotice").addEventListener("click", function(){
+          popup.remove();
+        });
+      }
+    });
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -97,7 +173,7 @@
 
   <main class="container">
     <section class="category-header">
-      <h2>Mơ Nắng — Hành trình của một sản phẩm</h2>
+      <h2 class="gradient-title">Mơ Nắng — Hành trình của một sản phẩm</h2>
     </section>
 
     <section class="posts-list">
