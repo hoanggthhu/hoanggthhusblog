@@ -5,15 +5,29 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Danh sách Blogs - Mơ Nắng</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-
   <style>
-    /* giữ nguyên style cũ */
-
-    /* Thêm style cho search box */
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 2rem;
+      background: #f8f8f8;
+    }
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: gradientFlow 5s ease infinite;
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
     .search-container {
-      margin: 1rem 0;
       text-align: right;
+      margin-bottom: 1rem;
     }
     .search-input {
       padding: 0.5rem 1rem;
@@ -28,45 +42,83 @@
       outline: none;
       border-color: #4a2a8b;
     }
+    .posts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .post-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease;
+      will-change: transform, opacity;
+    }
+    .post-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .post-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.45s cubic-bezier(.2,.9,.3,1), filter 0.3s ease;
+      display: block;
+    }
+    .post-card:hover img {
+      transform: scale(1.06) translateZ(0);
+      filter: brightness(1.03);
+    }
+    .post-body {
+      padding: 1rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .post-body h4 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+    .post-body .excerpt {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #4c4a48;
+      margin-bottom: 0.75rem;
+    }
+    .post-body .read {
+      text-decoration: none;
+      color: #6a4caf;
+      font-weight: 600;
+      font-size: 0.95rem;
+      align-self: flex-start;
+      transition: color .2s ease, transform .08s ease;
+    }
+    .post-body .read:hover {
+      text-decoration: underline;
+      color: #4a2a8b;
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner" style="position:relative;">
-      <a class="brand" href="index.html" aria-label="Về trang chủ">
-        <h1 class="gradient-title">Mơ Nắng</h1>
-        <p class="tag">Những món đồ mang năng lượng chữa lành</p>
-      </a>
-      <!-- burger và nav giữ nguyên -->
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="category-header">
-      <h2 class="gradient-title">Danh sách Blogs</h2>
-    </section>
-
-    <div class="search-container">
-      <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm blog..." aria-label="Tìm kiếm blog">
-    </div>
-
-    <section class="posts-list" id="postsList">
-      <!-- blog posts load từ JSON hoặc hardcode -->
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; <span id="year2"></span> Hoàngg Thhư's Blog</p>
-    </div>
-  </footer>
+  <h1>Danh sách Blogs - Mơ Nắng</h1>
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm blog...">
+  </div>
+  <section class="posts-list" id="postsList"></section>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const yearEl = document.getElementById("year2");
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    document.addEventListener("DOMContentLoaded", () => {
+      const postsList = document.getElementById("postsList");
+      const searchInput = document.getElementById("searchInput");
 
-      // Mảng blog sample, có thể thay bằng fetch từ blog.json
       const blogs = [
         {
           title: "Hành trình một chiếc khăn tay từ nét thêu đầu tiên",
@@ -82,20 +134,15 @@
         }
       ];
 
-      const postsList = document.getElementById("postsList");
-      const searchInput = document.getElementById("searchInput");
-
-      // Hàm render blog list
-      function renderBlogs(filteredBlogs) {
+      function render(blogs) {
         postsList.innerHTML = "";
-        if (filteredBlogs.length === 0) {
+        if (blogs.length === 0) {
           postsList.innerHTML = "<p>Không tìm thấy blog phù hợp.</p>";
           return;
         }
-        filteredBlogs.forEach((blog, index) => {
+        blogs.forEach((blog, idx) => {
           const article = document.createElement("article");
           article.className = "post-card";
-          article.dataset.index = index;
           article.innerHTML = `
             <img src="${blog.image}" alt="${blog.title}">
             <div class="post-body">
@@ -105,26 +152,22 @@
             </div>
           `;
           postsList.appendChild(article);
-
-          // Hiệu ứng reveal (giữ nguyên)
-          setTimeout(() => article.classList.add('show'), index * 120);
+          setTimeout(() => article.classList.add('show'), idx * 120);
         });
       }
 
-      // Render toàn bộ blog lần đầu
-      renderBlogs(blogs);
+      render(blogs);
 
-      // Lọc blog theo từ khóa search
       searchInput.addEventListener("input", () => {
-        const query = searchInput.value.trim().toLowerCase();
-        const filtered = blogs.filter(blog =>
-          blog.title.toLowerCase().includes(query) ||
-          blog.excerpt.toLowerCase().includes(query)
+        const val = searchInput.value.toLowerCase();
+        const filtered = blogs.filter(b =>
+          b.title.toLowerCase().includes(val) || b.excerpt.toLowerCase().includes(val)
         );
-        renderBlogs(filtered);
+        render(filtered);
       });
     });
   </script>
 </body>
 </html>
+
 
