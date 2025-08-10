@@ -73,7 +73,20 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Script chung -->
+  <script>
+    // Burger menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.getElementById('nav-toggle');
+      const mainNav = document.getElementById('main-nav');
+
+      if (navToggle && mainNav) {
+        navToggle.addEventListener('click', function() {
+          mainNav.classList.toggle('active');
+        });
+      }
+    });
+  </script>
 
   <!-- Browser Detect -->
   <script>
