@@ -87,6 +87,22 @@
       .about-grid {
         grid-template-columns: 1fr;
       }
+      .menu-toggle {
+        display: block;
+      }
+      .main-nav {
+        display: none;
+      }
+      .main-nav.active {
+        display: block;
+      }
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      display: none;
     }
   </style>
 </head>
@@ -97,6 +113,8 @@
         <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
         <p class="tag">Về mình</p>
       </a>
+      <!-- nút burger -->
+      <button class="menu-toggle" aria-label="Mở menu">&#9776;</button>
       <nav class="main-nav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
@@ -139,6 +157,11 @@
   </footer>
 
   <script>
+    // Toggle menu
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.main-nav').classList.toggle('active');
+    });
+
     // Browser detect
     (function() {
       const isOldBrowser = !('querySelector' in document && 'addEventListener' in window);
@@ -152,3 +175,4 @@
   </script>
 </body>
 </html>
+
