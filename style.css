@@ -333,3 +333,8 @@ body{
 .main-nav a:hover::after {
   width: 100%;
 }
+.gradient-title {
+  background: linear-gradient(135deg, #f59e0b, #ef4444); /* vàng cam - đỏ vintage */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
