@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
   const nav = document.getElementById('main-nav');
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
-      nav.classList.toggle('open');
+      nav.classList.toggle('active'); // Đổi 'open' thành 'active'
     });
   }
 
