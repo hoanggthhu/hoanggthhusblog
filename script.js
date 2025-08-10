@@ -77,6 +77,14 @@ function typeWriterEffect(elementId, text, speed) {
   }
   typing();
 }
+
+// === Thêm đoạn auto active menu ===
+const currentPage = window.location.pathname.split("/").pop();
+document.querySelectorAll(".main-nav a").forEach(link => {
+  if (link.getAttribute("href") === currentPage) {
+    link.classList.add("active");
+  }
+});
 </script>
 </body>
 </html>
