@@ -126,6 +126,33 @@
   </style>
 </head>
 <body>
+  <!-- Browser Detect -->
+  <script>
+    (function() {
+      const ua = navigator.userAgent;
+      let browserName = "Không xác định";
+
+      if (/chrome|crios|crmo/i.test(ua) && !/edge|edg/i.test(ua) && !/opr/i.test(ua)) {
+        browserName = "Google Chrome";
+      } else if (/firefox|fxios/i.test(ua)) {
+        browserName = "Mozilla Firefox";
+      } else if (/safari/i.test(ua) && !/chrome|crios|crmo/i.test(ua)) {
+        browserName = "Safari";
+      } else if (/edg/i.test(ua)) {
+        browserName = "Microsoft Edge";
+      } else if (/opr/i.test(ua)) {
+        browserName = "Opera";
+      } else if (/msie|trident/i.test(ua)) {
+        browserName = "Internet Explorer";
+      }
+
+      if (browserName === "Safari" || browserName === "Internet Explorer") {
+        alert(`Bạn đang dùng ${browserName}. Một số hiệu ứng có thể hiển thị khác trên trình duyệt này.`);
+      }
+      console.log("Trình duyệt của bạn:", browserName);
+    })();
+  </script>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
@@ -192,7 +219,6 @@
           nav.classList.toggle("nav-open");
         });
 
-        // Đóng menu khi bấm link
         nav.querySelectorAll("a").forEach(link => {
           link.addEventListener("click", () => {
             nav.classList.remove("nav-open");
@@ -200,38 +226,13 @@
         });
       }
 
-      // Năm hiện tại
       const yearEl = document.getElementById("year4");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
     });
   </script>
-
-  <!-- Browser Detect -->
-  <script>
-    (function() {
-      const ua = navigator.userAgent;
-      let browserName = "Không xác định";
-
-      if (/chrome|crios|crmo/i.test(ua) && !/edge|edg/i.test(ua)) {
-        browserName = "Google Chrome";
-      } else if (/firefox|fxios/i.test(ua)) {
-        browserName = "Mozilla Firefox";
-      } else if (/safari/i.test(ua) && !/chrome|crios/i.test(ua)) {
-        browserName = "Safari";
-      } else if (/edg/i.test(ua)) {
-        browserName = "Microsoft Edge";
-      } else if (/msie|trident/i.test(ua)) {
-        browserName = "Internet Explorer";
-      }
-
-      if (browserName === "Safari" || browserName === "Internet Explorer") {
-        alert(`Bạn đang dùng ${browserName}. Một số hiệu ứng có thể hiển thị khác trên trình duyệt này.`);
-      }
-      console.log("Trình duyệt của bạn:", browserName);
-    })();
-  </script>
 </body>
 </html>
+
 
 
 
