@@ -7,6 +7,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <meta name="description" content="Danh sách bài viết — Góc một chút bình yên">
+  <style>
+    /* Burger menu style */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      .main-nav {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+      .main-nav.nav-open {
+        display: flex;
+      }
+      .main-nav ul {
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+      }
+      .main-nav li {
+        list-style: none;
+        border-bottom: 1px solid #eee;
+      }
+      .main-nav a {
+        display: block;
+        padding: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -16,8 +57,8 @@
         <p class="tag">Mình học cách yêu thương và trưởng thành</p>
         <p class="tag">với một trái tim nguyên vẹn</p>
       </a>
-      <button id="nav-toggle" aria-label="Toggle menu">☰</button>
-      <nav id="main-nav" class="main-nav">
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <nav class="main-nav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
           <li><a href="mo-nang.html">Mơ Nắng</a></li>
@@ -73,18 +114,28 @@
     </div>
   </footer>
 
-  <!-- Script chung -->
+  <!-- Burger menu script -->
   <script>
-    // Burger menu toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      const navToggle = document.getElementById('nav-toggle');
-      const mainNav = document.getElementById('main-nav');
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector(".main-nav");
 
-      if (navToggle && mainNav) {
-        navToggle.addEventListener('click', function() {
-          mainNav.classList.toggle('active');
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          nav.classList.toggle("nav-open");
+        });
+
+        // Đóng menu khi bấm link
+        nav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            nav.classList.remove("nav-open");
+          });
         });
       }
+
+      // Năm hiện tại
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
     });
   </script>
 
