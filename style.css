@@ -147,3 +147,11 @@ body{
 .card a:hover::after {
   width: 100%;
 }
+.intro-message h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #6d4ba3; /* tím nhạt giống hình cháu gửi */
+  font-size: 1.2rem;
+  white-space: pre-wrap;
+  margin-top: 0.5rem;
+}
