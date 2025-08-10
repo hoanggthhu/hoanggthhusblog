@@ -11,23 +11,33 @@
     .hero {
       position: relative;
       height: 80vh;
-      background: url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: white;
     }
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
     .hero::after {
       content: '';
       position: absolute;
       inset: 0;
       background: rgba(0,0,0,0.3);
+      z-index: 1;
     }
     .hero-content {
       position: relative;
       max-width: 700px;
-      z-index: 1;
+      z-index: 2;
       animation: fadeInUp 1.2s ease-out;
     }
     .hero-content h1 {
@@ -99,56 +109,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
-
-  <!-- Browser detect -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var ua = navigator.userAgent;
-      if (/MSIE|Trident/.test(ua)) {
-        var popup = document.createElement("div");
-        popup.style.position = "fixed";
-        popup.style.top = "0";
-        popup.style.left = "0";
-        popup.style.width = "100%";
-        popup.style.height = "100%";
-        popup.style.backgroundColor = "rgba(0,0,0,0.5)";
-        popup.style.display = "flex";
-        popup.style.justifyContent = "center";
-        popup.style.alignItems = "center";
-        popup.style.zIndex = "9999";
-        popup.innerHTML = `
-          <div style="
-            background: #fff;
-            padding: 24px 30px;
-            border-radius: 12px;
-            max-width: 400px;
-            text-align: center;
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-          ">
-            <h2 style="color:#b45309; font-size:1.3rem; margin-bottom:12px;">⚠ Trình duyệt không được hỗ trợ</h2>
-            <p style="color:#444; line-height:1.5; margin-bottom:18px;">
-              Bạn đang dùng một trình duyệt quá cũ.<br>
-              Hãy dùng <strong>Chrome</strong>, <strong>Edge</strong>, <strong>Firefox</strong> hoặc <strong>Safari</strong> để trải nghiệm tốt hơn nhé 💛
-            </p>
-            <button id="closeBrowserNotice" style="
-              padding: 8px 16px;
-              background: linear-gradient(135deg, var(--accent1, #f59e0b), var(--accent2, #ef4444));
-              color: #fff;
-              border: none;
-              border-radius: 8px;
-              font-weight: 600;
-              cursor: pointer;
-            ">Đã hiểu</button>
-          </div>
-        `;
-        document.body.appendChild(popup);
-        document.getElementById("closeBrowserNotice").addEventListener("click", function(){
-          popup.remove();
-        });
-      }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header">
@@ -174,6 +134,9 @@
   </header>
 
   <section class="hero">
+    <video autoplay muted loop playsinline>
+      <source src="background_video.mp4" type="video/mp4">
+    </video>
     <div class="hero-content">
       <h1 class="gradient-title">Chào mừng bạn đến với góc nhỏ của mình</h1>
       <p>Những mảnh ghép bình yên, những câu chuyện chữa lành</p>
@@ -215,6 +178,8 @@
       <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog</p>
     </div>
   </footer>
-  <script src="script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
