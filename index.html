@@ -228,7 +228,7 @@
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
       <nav id="main-nav" class="main-nav">
         <ul>
-          <li><a href="index.html" class="active">Trang chủ</a></li>
+          <li><a href="index.html">Trang chủ</a></li>
           <li><a href="mo-nang.html">Mơ Nắng</a></li>
           <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
           <li><a href="binh-yen.html">Góc bình yên</a></li>
@@ -318,9 +318,22 @@
     }, { threshold: 0.2 });
 
     postCards.forEach(card => observer.observe(card));
+
+    // Tự động active menu dựa trên URL
+    document.addEventListener("DOMContentLoaded", function() {
+      const currentPath = window.location.pathname.split("/").pop() || "index.html";
+      document.querySelectorAll('#main-nav a').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
   </script>
 </body>
 </html>
+
 
 
 
