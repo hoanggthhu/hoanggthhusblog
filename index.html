@@ -133,11 +133,14 @@
         display: none;
         background: white;
         position: fixed;
-        top: 60px;
-        right: 0;
-        left: 0;
-        padding: 10px 0;
+        top: 100px; /* kéo xuống dưới header */
+        right: 20px; /* lệch sang phải */
+        width: calc(100% - 40px);
+        max-width: 320px;
+        border-radius: 12px;
+        padding: 15px 0;
         z-index: 10000;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       }
       #main-nav.active {
         display: block;
@@ -157,69 +160,12 @@
         text-decoration: none;
         color: #333;
       }
-
-      /* Search bar mobile full width */
-      #search-bar {
-        width: 90vw !important;
-        margin: 10px auto 20px auto;
-      }
     }
 
     /* Chặn scroll khi menu mở */
     .no-scroll {
       overflow: hidden;
       height: 100%;
-    }
-
-    /* Search bar style */
-    #search-bar {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      border: none;
-      padding: 6px 10px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      width: 200px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      outline: none;
-      transition: width 0.3s ease;
-      z-index: 10002;
-    }
-    #search-bar:focus {
-      width: 280px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    }
-
-    /* Search results dropdown */
-    #search-results {
-      position: absolute;
-      right: 0;
-      top: 100%;
-      width: 280px;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border-radius: 0 0 12px 12px;
-      max-height: 300px;
-      overflow-y: auto;
-      font-size: 0.9rem;
-      z-index: 10002;
-      display: none;
-    }
-    #search-results.visible {
-      display: block;
-    }
-    #search-results a {
-      display: block;
-      padding: 8px 12px;
-      color: #333;
-      text-decoration: none;
-      border-bottom: 1px solid #eee;
-      transition: background-color 0.2s ease;
-    }
-    #search-results a:hover {
-      background-color: #fdfaf7;
     }
   </style>
 </head>
@@ -231,10 +177,6 @@
         <p class="tag"> Mình học cách yêu thương</p>
         <p class="tag"> và trưởng thành với một trái tim nguyên vẹn</p>
       </a>
-
-      <!-- Search input -->
-      <input type="search" id="search-bar" placeholder="Tìm blog..." aria-label="Tìm blog">
-
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
       <nav id="main-nav" class="main-nav">
         <ul>
@@ -247,9 +189,6 @@
           <li><a href="contact.html">Liên lạc</a></li>
         </ul>
       </nav>
-
-      <!-- Search results dropdown -->
-      <div id="search-results"></div>
     </div>
   </header>
 
@@ -331,63 +270,10 @@
     }, { threshold: 0.2 });
 
     postCards.forEach(card => observer.observe(card));
-
-    // ========== Search blog feature ==========
-
-    // Dữ liệu blog mẫu (bà thay bằng JSON thật nha)
-    const blogData = [
-      {
-        title: "Viết cho những ngày muốn bỏ cuộc",
-        link: "#"
-      },
-      {
-        title: "Những điều nhỏ bé làm mình hạnh phúc",
-        link: "#"
-      },
-      {
-        title: "Playlist cho những chiều mưa",
-        link: "#"
-      },
-      // Thêm blog mới ở đây ...
-    ];
-
-    const searchInput = document.getElementById('search-bar');
-    const resultsBox = document.getElementById('search-results');
-
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.trim().toLowerCase();
-      if (query.length === 0) {
-        resultsBox.innerHTML = '';
-        resultsBox.classList.remove('visible');
-        return;
-      }
-
-      // Lọc blog theo title chứa query
-      const matched = blogData.filter(blog => blog.title.toLowerCase().includes(query));
-
-      if (matched.length === 0) {
-        resultsBox.innerHTML = '<div style="padding:8px 12px; color:#999;">Không tìm thấy kết quả</div>';
-        resultsBox.classList.add('visible');
-        return;
-      }
-
-      // Tạo danh sách kết quả
-      resultsBox.innerHTML = matched.map(blog => {
-        return `<a href="${blog.link}" tabindex="0">${blog.title}</a>`;
-      }).join('');
-
-      resultsBox.classList.add('visible');
-    });
-
-    // Ẩn kết quả khi click ra ngoài
-    document.addEventListener('click', (e) => {
-      if (!searchInput.contains(e.target) && !resultsBox.contains(e.target)) {
-        resultsBox.classList.remove('visible');
-      }
-    });
   </script>
 </body>
 </html>
+
 
 
 
