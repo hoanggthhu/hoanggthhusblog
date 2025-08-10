@@ -6,12 +6,95 @@
   <title>Về mình</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Tiêu đề gradient */
+    .gradient-title {
+      background: linear-gradient(90deg, #6a4caf, #ff8a65);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Menu underline hover */
+    .main-nav a {
+      position: relative;
+      text-decoration: none;
+    }
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+    .main-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Ảnh về mình hover */
+    .about-photo img {
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.4s ease, filter 0.4s ease;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .about-photo img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
+
+    /* Layout giới thiệu */
+    .about-section {
+      margin-top: 2rem;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .about-content h2, .about-content h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    .about-content .lead {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .about-content ul {
+      margin: 0 0 1rem 1.25rem;
+      padding: 0;
+      list-style: disc;
+    }
+    .about-content li {
+      margin-bottom: 0.5rem;
+    }
+    .cta a {
+      color: #6a4caf;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .cta a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-        <h1>Hoàngg Thhư's Blog</h1>
+        <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
         <p class="tag">Về mình</p>
       </a>
       <nav class="main-nav">
@@ -31,7 +114,7 @@
   <main class="container about-section">
     <div class="about-grid">
       <div class="about-photo">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=a1bc2d3e4f5a6b7c8d9e0f1a2b3c4d5e" alt="Portrait">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Portrait">
       </div>
       <div class="about-content">
         <h2>Về mình</h2>
@@ -55,6 +138,17 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Browser detect
+    (function() {
+      const isOldBrowser = !('querySelector' in document && 'addEventListener' in window);
+      if (isOldBrowser) {
+        alert('Trình duyệt của bạn quá cũ. Vui lòng nâng cấp để trải nghiệm tốt nhất.');
+      }
+    })();
+
+    // Hiển thị năm tự động
+    document.getElementById('year5').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
