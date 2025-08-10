@@ -1,14 +1,15 @@
+<script>
 document.addEventListener('DOMContentLoaded', function(){
-  // === Toggle menu cho index.html và các trang dùng id ===
-  const toggle = document.getElementById('nav-toggle');
-  const nav = document.getElementById('main-nav');
+  // === Toggle menu cho header ===
+  const toggle = document.getElementById('burger');
+  const nav = document.querySelector('.main-nav');
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
-      nav.classList.toggle('active'); // Đổi 'open' thành 'active'
+      nav.classList.toggle('active'); // class 'active' đã có trong CSS mobile
     });
   }
 
-  // === Year filler cho tất cả các trang ===
+  // === Year filler ===
   const years = [ 'year','year2','year3','year4','year5','year6' ];
   years.forEach(id => {
     const el = document.getElementById(id);
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }, { threshold: 0.1 });
   elements.forEach(el => observer.observe(el));
 
-  // === Auto intro message depending on page ===
+  // === Auto intro message ===
   const messages = {
     "mo-nang.html": "Giặt những giấc mơ rồi phơi dưới nắng",
     "o-trong-vuon.html": "Nơi mùi hương biết kể chuyện",
@@ -76,5 +77,8 @@ function typeWriterEffect(elementId, text, speed) {
   }
   typing();
 }
+</script>
+</body>
+</html>
 
 
