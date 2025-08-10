@@ -6,6 +6,72 @@
   <title>Ở Trong Vườn — Hương liệu & cây cỏ</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .posts-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .post-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .post-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .post-card:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
+
+    .post-body {
+      padding: 1rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-body h4 {
+      font-family: 'Playfair Display', serif;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .post-body .excerpt {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-body .read {
+      text-decoration: none;
+      color: #6a4caf;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .post-body .read:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -30,13 +96,13 @@
 
   <main class="container">
     <section class="category-header">
-      <h2></h2>
+      <h2>Nhật ký của mùi hương</h2>
       <p class="lead">Kiến thức cây cỏ, công thức mùi và những ghi chép từ vườn nhỏ.</p>
     </section>
 
     <section class="posts-list">
       <article class="post-card">
-        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b19f5a0a9a20c2b37b1b9c9a7e4f8a9" alt="">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
         <div class="post-body">
           <h4>Hàm hương — hương thơm nhẹ như làn gió sớm mai</h4>
           <p class="excerpt">Tìm hiểu đặc tính, cách dùng và cảm nhận của hàm hương trong sản phẩm.</p>
@@ -45,7 +111,7 @@
       </article>
 
       <article class="post-card">
-        <img src="https://images.unsplash.com/photo-1501004017187-8f3b0c6c8c9d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9" alt="">
+        <img src="https://images.unsplash.com/photo-1501004017187-8f3b0c6c8c9d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
         <div class="post-body">
           <h4>Làm túi thơm từ thảo mộc tươi — hướng dẫn đơn giản</h4>
           <p class="excerpt">Công thức dễ làm tại nhà để tạo túi thơm chữa lành.</p>
