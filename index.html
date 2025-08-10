@@ -115,50 +115,109 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Header adjustments for search */
+    .site-header .header-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      flex-shrink: 0;
+    }
+
+    /* Search box style */
+    #searchInput {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 280px;
+      max-width: 100%;
+      flex-grow: 1;
+      min-width: 180px;
+    }
+
     /* Mobile menu toggle */
     #nav-toggle {
-      display: none;
       background: none;
       border: none;
       font-size: 1.8rem;
       cursor: pointer;
+      flex-shrink: 0;
+      color: #333;
     }
+
+    /* Desktop nav */
+    #main-nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    #main-nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+    #main-nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      padding: 6px 8px;
+    }
+    #main-nav ul li a.active {
+      color: var(--accent2, #ef4444);
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
-      #nav-toggle {
-        display: block;
-        color: #333;
-        z-index: 10001;
+      .site-header .header-inner {
+        justify-content: flex-start;
+      }
+      #searchInput {
+        order: 3;
+        width: 100%;
+        margin-top: 12px;
+        flex-grow: unset;
       }
       #main-nav {
         display: none;
-        background: white;
         position: fixed;
-        top: 100px; /* kéo xuống dưới header */
-        right: 20px; /* lệch sang phải */
+        top: 60px;
+        right: 20px;
         width: calc(100% - 40px);
         max-width: 320px;
+        background: white;
         border-radius: 12px;
         padding: 15px 0;
-        z-index: 10000;
         box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        flex-direction: column;
+        z-index: 10000;
       }
       #main-nav.active {
-        display: block;
+        display: flex;
       }
       #main-nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+        flex-direction: column;
+        gap: 10px;
       }
       #main-nav ul li {
+        margin: 0;
         text-align: center;
-        margin: 10px 0;
       }
       #main-nav ul li a {
-        display: block;
         padding: 10px;
-        text-decoration: none;
-        color: #333;
+        display: block;
+      }
+      #nav-toggle {
+        display: block;
+        margin-left: auto;
       }
     }
 
@@ -171,13 +230,17 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner" style="position: relative;">
+    <div class="container header-inner">
       <a class="brand" href="index.html">
         <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
         <p class="tag"> Mình học cách yêu thương</p>
         <p class="tag"> và trưởng thành với một trái tim nguyên vẹn</p>
       </a>
+
+      <input id="searchInput" type="search" placeholder="Tìm blog..." aria-label="Tìm blog">
+
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
+      
       <nav id="main-nav" class="main-nav">
         <ul>
           <li><a href="index.html" class="active">Trang chủ</a></li>
@@ -270,6 +333,22 @@
     }, { threshold: 0.2 });
 
     postCards.forEach(card => observer.observe(card));
+
+    // Search filter live
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", () => {
+      const filter = searchInput.value.toLowerCase();
+      const posts = document.querySelectorAll(".post-card");
+      posts.forEach(post => {
+        const title = post.querySelector("h4")?.textContent.toLowerCase() || "";
+        const excerpt = post.querySelector("p")?.textContent.toLowerCase() || "";
+        if (title.includes(filter) || excerpt.includes(filter)) {
+          post.style.display = "";
+        } else {
+          post.style.display = "none";
+        }
+      });
+    });
   </script>
 </body>
 </html>
