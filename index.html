@@ -3,9 +3,102 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Trang chủ — Hoàngg Thhư's Blog</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Hoàngg Thhư's Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Hero section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      background: url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+    }
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+      z-index: 1;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Latest posts */
+    .latest-posts {
+      padding: 50px 20px;
+      background: #fdfaf7;
+    }
+    .latest-posts h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-family: 'Playfair Display', serif;
+    }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .post-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease;
+    }
+    .post-card:hover {
+      transform: translateY(-5px);
+    }
+    .post-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .post-body {
+      padding: 15px;
+    }
+    .post-body h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .post-body p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    .read-btn {
+      display: inline-block;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, var(--accent1, #f59e0b), var(--accent2, #ef4444));
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 
   <!-- Browser detect -->
   <script>
@@ -58,13 +151,12 @@
   </script>
 </head>
 <body>
-  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
         <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
-        <p class="tag">Mình học cách yêu thương</p>
-        <p class="tag">và trưởng thành với một trái tim nguyên vẹn</p>
+        <p class="tag"> Mình học cách yêu thương</p>
+        <p class="tag"> và trưởng thành với một trái tim nguyên vẹn</p>
       </a>
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
       <nav id="main-nav" class="main-nav">
@@ -81,49 +173,48 @@
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <section class="hero-section">
-      <div class="container">
-        <h2 class="fade-in-up">Chào mừng bạn đến với blog của mình 🌿</h2>
-        <p class="fade-in-up delay-1">
-          Nơi mình lưu giữ những câu chuyện, ánh nắng và những góc nhỏ bình yên của cuộc sống.
-        </p>
-      </div>
-    </section>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Chào mừng bạn đến với góc nhỏ của mình</h1>
+      <p>Những mảnh ghép bình yên, những câu chuyện chữa lành</p>
+    </div>
+  </section>
 
-    <section class="home-links container">
-      <div class="card fade-in-up">
-        <h3>Mơ Nắng</h3>
-        <p>Những tia nắng ấm và câu chuyện ngọt ngào.</p>
-        <a href="mo-nang.html" class="btn">Khám phá</a>
-      </div>
-      <div class="card fade-in-up delay-1">
-        <h3>Ở Trong Vườn</h3>
-        <p>Chuyện cây lá và những bình yên xanh mát.</p>
-        <a href="o-trong-vuon.html" class="btn">Xem thêm</a>
-      </div>
-      <div class="card fade-in-up delay-2">
-        <h3>Góc bình yên</h3>
-        <p>Những phút lặng yên và cảm xúc nhẹ nhàng.</p>
-        <a href="binh-yen.html" class="btn">Tìm hiểu</a>
-      </div>
-      <div class="card fade-in-up delay-3">
-        <h3>Blogs</h3>
-        <p>Nhật ký và những điều mình muốn chia sẻ.</p>
-        <a href="blogs.html" class="btn">Đọc ngay</a>
-      </div>
-    </section>
-  </main>
+  <section class="latest-posts">
+    <h2>Bài viết mới nhất</h2>
+    <div class="posts-grid">
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="">
+        <div class="post-body">
+          <h4>Viết cho những ngày muốn bỏ cuộc</h4>
+          <p>Một thư nhẹ gửi bản thân — để biết mình không đơn độc.</p>
+          <a href="#" class="read-btn">Đọc</a>
+        </div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="">
+        <div class="post-body">
+          <h4>Những điều nhỏ bé làm mình hạnh phúc</h4>
+          <p>Danh sách nhỏ để bạn giữ lại khi ngày trở nên nặng.</p>
+          <a href="#" class="read-btn">Đọc</a>
+        </div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?q=80&w=1200&auto=format&fit=crop" alt="">
+        <div class="post-body">
+          <h4>Playlist cho những chiều mưa</h4>
+          <p>Âm nhạc để bạn thả trôi tâm hồn trong những ngày lặng.</p>
+          <a href="#" class="read-btn">Đọc</a>
+        </div>
+      </article>
+    </div>
+  </section>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>&copy; <span id="year"></span> Hoàngg Thhư's Blog</p>
     </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
 </html>
-
