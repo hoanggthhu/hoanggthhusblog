@@ -50,6 +50,21 @@
       opacity: 0.9;
     }
 
+    /* Gradient màu hologram cho tiêu đề hero */
+    .hero-content h1.gradient-title {
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200%;
+      background-position: 0%;
+      animation: gradientMove 6s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     /* Latest posts */
     .latest-posts {
       padding: 50px 20px;
@@ -333,6 +348,7 @@
   </script>
 </body>
 </html>
+
 
 
 
