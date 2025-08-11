@@ -1,17 +1,6 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Blogs — Danh sách bài viết</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Danh sách bài viết — Góc một chút bình yên">
-  <style>
-    /* Burger menu style */
-    .menu-toggle {<!DOCTYPE html>
-<html lang="vi">
-<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hoàngg Thhư's Blog</title>
@@ -73,26 +62,10 @@
       transform: translateY(0);
     }
     .post-card img {
-      transition: transform 0.4s ease, filter 0.4s ease;
-      /* Thêm animation float nhẹ */
-      animation: floatIn 0.8s ease forwards;
+      transition: transform 0.4s ease;
     }
     .post-card:hover img {
-      transform: scale(1.05) translateY(-5px);
-      filter: drop-shadow(0 8px 6px rgba(0,0,0,0.1));
-      animation-play-state: paused;
-    }
-
-    /* Animation float in từ dưới lên */
-    @keyframes floatIn {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -226,4 +199,5 @@
   </script>
 </body>
 </html>
+
 
