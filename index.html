@@ -50,8 +50,8 @@
       opacity: 0.9;
     }
 
-    /* Gradient màu hologram cho tiêu đề hero */
-    .hero-content h1.gradient-title {
+    /* Gradient màu hologram cho tiêu đề hero và danh sách blog */
+    .gradient-title {
       background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -133,7 +133,7 @@
     /* Header styles */
     .site-header {
       position: relative;
-      z-index: 2000; /* luôn nằm trên video */
+      z-index: 9999 !important; /* luôn nằm trên video và mọi thứ */
     }
     .site-header .header-inner {
       display: flex;
@@ -157,6 +157,7 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      z-index: 9999 !important;
     }
     .site-header .main-nav ul {
       display: flex;
@@ -187,7 +188,7 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease;
-      z-index: 1500;
+      z-index: 9998 !important;
     }
     .menu-overlay.active {
       opacity: 1;
@@ -202,7 +203,7 @@
       font-size: 1.8rem;
       cursor: pointer;
       color: #333;
-      z-index: 2001; /* trên cùng */
+      z-index: 10000 !important;
     }
 
     @media (max-width: 768px) {
@@ -220,7 +221,7 @@
         background: white;
         border-radius: 0;
         padding: 15px 0;
-        z-index: 2000;
+        z-index: 9999 !important;
         box-shadow: -4px 0 12px rgba(0,0,0,0.15);
         transition: right 0.3s ease;
       }
@@ -267,7 +268,7 @@
           <li><a href="mo-nang.html">Mơ Nắng</a></li>
           <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
           <li><a href="binh-yen.html">Góc bình yên</a></li>
-          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="blogs.html" class="gradient-title">Danh sách blog</a></li>
           <li><a href="ve-toi.html">Về mình</a></li>
           <li><a href="contact.html">Liên lạc</a></li>
         </ul>
@@ -378,6 +379,7 @@
   </script>
 </body>
 </html>
+
 
 
 
