@@ -54,7 +54,7 @@
       }
     }
 
-    /* === Hiệu ứng fade-in + hover cho bài viết === */
+    /* Hiệu ứng fade-in + hover cho bài viết */
     .post-card {
       opacity: 0;
       transform: translateY(40px);
@@ -71,20 +71,27 @@
       transform: scale(1.05);
     }
 
-    /* Đồng bộ màu tiêu đề "Danh sách Blogs" với tiêu đề trang */
+    /* Gradient cho tiêu đề Danh sách Blogs */
     .section-title.gradient-title {
-      background: linear-gradient(120deg, #d4a373, #a66b5d);
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-size: 200%;
-      background-position: 0%;
       animation: gradientMove 6s ease infinite;
+      text-align: center;
+      font-weight: 700;
     }
-
     @keyframes gradientMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+    .lead {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+      font-weight: 300;
     }
   </style>
 </head>
@@ -153,34 +160,28 @@
     </div>
   </footer>
 
-  <!-- Burger menu script -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const toggle = document.getElementById("nav-toggle");
       const nav = document.getElementById("main-nav");
-
       if (toggle && nav) {
         toggle.addEventListener("click", () => {
           nav.classList.toggle("nav-open");
         });
-
         nav.querySelectorAll("a").forEach(link => {
           link.addEventListener("click", () => {
             nav.classList.remove("nav-open");
           });
         });
       }
-
       document.getElementById("year").textContent = new Date().getFullYear();
     });
   </script>
 
-  <!-- Browser Detect -->
   <script>
     (function() {
       const ua = navigator.userAgent;
       let browserName = "Không xác định";
-
       if (/chrome|crios|crmo/i.test(ua) && !/edge|edg/i.test(ua)) {
         browserName = "Google Chrome";
       } else if (/firefox|fxios/i.test(ua)) {
@@ -192,15 +193,12 @@
       } else if (/msie|trident/i.test(ua)) {
         browserName = "Internet Explorer";
       }
-
       if (browserName === "Safari" || browserName === "Internet Explorer") {
         alert(`Bạn đang dùng ${browserName}. Một số hiệu ứng có thể hiển thị khác trên trình duyệt này.`);
       }
-      console.log("Trình duyệt của bạn:", browserName);
     })();
   </script>
 
-  <!-- Hiệu ứng fade-in khi cuộn -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const cards = document.querySelectorAll(".post-card");
@@ -212,7 +210,6 @@
           }
         });
       }, { threshold: 0.2 });
-
       cards.forEach(card => observer.observe(card));
     });
   </script>
