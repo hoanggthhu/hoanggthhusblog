@@ -131,6 +131,10 @@
     }
 
     /* Header styles */
+    .site-header {
+      position: relative;
+      z-index: 2000; /* luôn nằm trên video */
+    }
     .site-header .header-inner {
       display: flex;
       align-items: center;
@@ -175,6 +179,21 @@
       color: white;
     }
 
+    /* Overlay cho mobile menu */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 1500;
+    }
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
     /* Mobile menu toggle */
     #nav-toggle {
       display: none;
@@ -183,7 +202,7 @@
       font-size: 1.8rem;
       cursor: pointer;
       color: #333;
-      z-index: 10001;
+      z-index: 2001; /* trên cùng */
     }
 
     @media (max-width: 768px) {
@@ -191,21 +210,22 @@
         display: block;
       }
       .site-header .main-nav {
-        display: none;
+        display: flex;
         flex-direction: column;
         position: fixed;
-        top: 100px; /* kéo xuống dưới header */
-        right: 20px;
-        width: calc(100% - 40px);
-        max-width: 320px;
+        top: 0;
+        right: -320px;
+        width: 280px;
+        height: 100%;
         background: white;
-        border-radius: 12px;
+        border-radius: 0;
         padding: 15px 0;
-        z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        z-index: 2000;
+        box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+        transition: right 0.3s ease;
       }
       .site-header .main-nav.active {
-        display: flex;
+        right: 0;
       }
       .site-header .main-nav ul {
         flex-direction: column;
@@ -254,6 +274,9 @@
       </nav>
     </div>
   </header>
+
+  <!-- Overlay -->
+  <div id="menu-overlay" class="menu-overlay"></div>
 
   <section class="hero">
     <video autoplay muted loop playsinline>
@@ -306,20 +329,27 @@
 
     const navToggle = document.getElementById("nav-toggle");
     const mainNav = document.getElementById("main-nav");
+    const menuOverlay = document.getElementById("menu-overlay");
+
+    function closeMenu() {
+      mainNav.classList.remove("active");
+      menuOverlay.classList.remove("active");
+      document.body.classList.remove("no-scroll");
+    }
 
     navToggle.addEventListener("click", function () {
       mainNav.classList.toggle("active");
+      menuOverlay.classList.toggle("active");
       document.body.classList.toggle("no-scroll");
     });
 
+    menuOverlay.addEventListener("click", closeMenu);
+
     mainNav.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        mainNav.classList.remove("active");
-        document.body.classList.remove("no-scroll");
-      });
+      link.addEventListener("click", closeMenu);
     });
 
-    // Hiệu ứng fade-in cho post-card với delay so le
+    // Hiệu ứng fade-in cho post-card
     const postCards = document.querySelectorAll('.post-card');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -334,7 +364,7 @@
 
     postCards.forEach(card => observer.observe(card));
 
-    // Tự động active menu dựa trên URL
+    // Active menu theo URL
     document.addEventListener("DOMContentLoaded", function() {
       const currentPath = window.location.pathname.split("/").pop() || "index.html";
       document.querySelectorAll('#main-nav a').forEach(link => {
@@ -348,6 +378,7 @@
   </script>
 </body>
 </html>
+
 
 
 
