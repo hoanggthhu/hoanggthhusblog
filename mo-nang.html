@@ -6,9 +6,7 @@
   <title>Mơ Nắng — Những món đồ mang năng lượng chữa lành</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
   <style>
-    /* ===== HIỆU ỨNG CHỮ ĐỒNG BỘ ===== */
     .gradient-title {
       background: linear-gradient(90deg, #ffb347, #ffcc33, #ffb347);
       background-size: 200% auto;
@@ -41,8 +39,6 @@
     .main-nav a.active::after {
       width: 100%;
     }
-
-    /* ===== STYLE CHO TRANG MƠ NẮNG ===== */
     .posts-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -57,10 +53,23 @@
       display: flex;
       flex-direction: column;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      /* Mới thêm để fade-in */
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+      animation-delay: var(--delay, 0s);
     }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Hover nâng cấp */
     .post-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      z-index: 2;
     }
     .post-card img {
       width: 100%;
@@ -69,8 +78,8 @@
       transition: transform 0.4s ease, filter 0.4s ease;
     }
     .post-card:hover img {
-      transform: scale(1.05);
-      filter: brightness(1.05);
+      transform: scale(1.08);
+      filter: brightness(1.1);
     }
     .post-body {
       padding: 1rem 1.25rem;
@@ -82,6 +91,12 @@
       font-family: 'Playfair Display', serif;
       margin: 0 0 0.5rem 0;
       font-size: 1.1rem;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .post-body h4:hover {
+      color: #ffcc33;
+      text-shadow: 0 0 8px #ffcc33;
     }
     .post-body .excerpt {
       flex: 1;
@@ -94,12 +109,25 @@
       color: #6a4caf;
       font-weight: 600;
       font-size: 0.95rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .post-body .read::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #6a4caf;
+      left: 0;
+      bottom: -2px;
+      transition: width 0.3s ease;
     }
     .post-body .read:hover {
-      text-decoration: underline;
+      color: #4a30a3;
     }
-
-    /* ===== BURGER MENU ===== */
+    .post-body .read:hover::after {
+      width: 100%;
+    }
     .burger {
       display: none;
       flex-direction: column;
@@ -136,7 +164,6 @@
         flex-direction: column;
         gap: 0.5rem;
       }
-      /* hiệu ứng đổi icon burger khi mở */
       .burger.active span:nth-child(1) {
         transform: rotate(45deg) translateY(7px);
       }
@@ -148,56 +175,6 @@
       }
     }
   </style>
-
-  <!-- Browser detect -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var ua = navigator.userAgent;
-      if (/MSIE|Trident/.test(ua)) {
-        var popup = document.createElement("div");
-        popup.style.position = "fixed";
-        popup.style.top = "0";
-        popup.style.left = "0";
-        popup.style.width = "100%";
-        popup.style.height = "100%";
-        popup.style.backgroundColor = "rgba(0,0,0,0.5)";
-        popup.style.display = "flex";
-        popup.style.justifyContent = "center";
-        popup.style.alignItems = "center";
-        popup.style.zIndex = "9999";
-        popup.innerHTML = 
-          <div style="
-            background: #fff;
-            padding: 24px 30px;
-            border-radius: 12px;
-            max-width: 400px;
-            text-align: center;
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-          ">
-            <h2 style="color:#b45309; font-size:1.3rem; margin-bottom:12px;">⚠ Trình duyệt không được hỗ trợ</h2>
-            <p style="color:#444; line-height:1.5; margin-bottom:18px;">
-              Bạn đang dùng một trình duyệt quá cũ.<br>
-              Hãy dùng <strong>Chrome</strong>, <strong>Edge</strong>, <strong>Firefox</strong> hoặc <strong>Safari</strong> để trải nghiệm tốt hơn nhé 💛
-            </p>
-            <button id="closeBrowserNotice" style="
-              padding: 8px 16px;
-              background: linear-gradient(135deg, #f59e0b, #ef4444);
-              color: #fff;
-              border: none;
-              border-radius: 8px;
-              font-weight: 600;
-              cursor: pointer;
-            ">Đã hiểu</button>
-          </div>
-        ;
-        document.body.appendChild(popup);
-        document.getElementById("closeBrowserNotice").addEventListener("click", function(){
-          popup.remove();
-        });
-      }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header">
@@ -206,14 +183,11 @@
         <h1 class="gradient-title">Mơ Nắng</h1>
         <p class="tag">Những món đồ mang năng lượng chữa lành</p>
       </a>
-
-      <!-- Burger button -->
       <div class="burger" id="burger">
         <span></span>
         <span></span>
         <span></span>
       </div>
-
       <nav class="main-nav" id="mainNav">
         <ul>
           <li><a href="index.html">Trang chủ</a></li>
@@ -227,76 +201,103 @@
       </nav>
     </div>
   </header>
-
   <main class="container">
     <section class="category-header">
       <h2 class="gradient-title">Mơ Nắng — Hành trình của một sản phẩm</h2>
     </section>
-
     <section class="posts-list">
+      <!-- 15 blogs -->
       <article class="post-card">
-        <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070e4a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
-        <div class="post-body">
-          <h4>Hành Trình Mơ Nắng</h4>
-          <p class="excerpt">Một bài kể chi tiết về quá trình, vật liệu và cảm xúc khi tạo ra chiếc khăn.</p>
-          <a href="#" class="read">Đọc</a>
-        </div>
+        <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070e4a" alt="">
+        <div class="post-body"><h4>Hành Trình Mơ Nắng</h4><p class="excerpt">Một bài kể chi tiết...</p><a href="#" class="read">Đọc</a></div>
       </article>
-
       <article class="post-card">
-        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
-        <div class="post-body">
-          <h4>Hành trình tạo nên chiếc khăn tay đầu tiên</h4>
-          <p class="excerpt">Mỗi mẫu có một ý tưởng, một ký ức và một thông điệp nhỏ.</p>
-          <a href="blog-post-1.html" class="read">Đọc</a>
-        </div>
-        
-        <article class="post-card">
-        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
-        <div class="post-body">
-          <h4>Khăn tay/h4>
-          <p class="excerpt">Hôm nay thế nào?</p>
-          <a href="blog-post-1.html" class="read">Đọc</a>
-        </div>
+        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe" alt="">
+        <div class="post-body"><h4>Chiếc khăn tay đầu tiên</h4><p class="excerpt">Mỗi mẫu có một ý tưởng...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1484980972926-edee96e0960d" alt="">
+        <div class="post-body"><h4>Ngày nắng và tách trà</h4><p class="excerpt">Một buổi chiều an yên...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1524594154908-edd3304ff845" alt="">
+        <div class="post-body"><h4>Vải lanh và hương đồng</h4><p class="excerpt">Câu chuyện về loại vải...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511" alt="">
+        <div class="post-body"><h4>Bó hoa khô nhỏ</h4><p class="excerpt">Món quà giản dị...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9" alt="">
+        <div class="post-body"><h4>Chút nắng trên bàn gỗ</h4><p class="excerpt">Khoảnh khắc bình yên...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb" alt="">
+        <div class="post-body"><h4>Góc nhỏ bên cửa sổ</h4><p class="excerpt">Nơi ánh sáng và gió...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <!-- 9 blogs mới -->
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4" alt="">
+        <div class="post-body"><h4>Buổi sáng ấm áp</h4><p class="excerpt">Hương cà phê thoang thoảng...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1503602642458-232111445657" alt="">
+        <div class="post-body"><h4>Nắng xuyên qua lá</h4><p class="excerpt">Câu chuyện về ánh sáng...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="">
+        <div class="post-body"><h4>Hoa và bình gốm</h4><p class="excerpt">Một sự kết hợp mộc mạc...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1519885606405-cbccfb9d62c5" alt="">
+        <div class="post-body"><h4>Ánh hoàng hôn</h4><p class="excerpt">Khoảnh khắc mặt trời...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1494475673543-6a6a27143b22" alt="">
+        <div class="post-body"><h4>Vườn mùa hè</h4><p class="excerpt">Những gam màu rực rỡ...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1520962918287-7448c2878f65" alt="">
+        <div class="post-body"><h4>Chiếc ghế cũ</h4><p class="excerpt">Vật chứng của những kỷ niệm...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1499955085172-a104c9463ece" alt="">
+        <div class="post-body"><h4>Khung cửa mùa thu</h4><p class="excerpt">Nơi lá vàng rơi lác đác...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1505489304219-87fb4b2b47c2" alt="">
+        <div class="post-body"><h4>Buổi trưa tĩnh lặng</h4><p class="excerpt">Chỉ còn tiếng chim...</p><a href="#" class="read">Đọc</a></div>
+      </article>
+      <article class="post-card">
+        <img src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6" alt="">
+        <div class="post-body"><h4>Hành lang đầy nắng</h4><p class="excerpt">Ánh sáng rọi qua từng ô cửa...</p><a href="#" class="read">Đọc</a></div>
       </article>
     </section>
   </main>
-
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>&copy; <span id="year2"></span> Hoàngg Thhư's Blog</p>
-    </div>
+    <p>&copy; 2025 Mơ Nắng. All rights reserved.</p>
   </footer>
-
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const burger = document.getElementById("burger");
-      const mainNav = document.getElementById("mainNav");
+    // Burger menu toggle
+    const burger = document.getElementById('burger');
+    const mainNav = document.getElementById('mainNav');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      mainNav.classList.toggle('open');
+    });
 
-      if (burger && mainNav) {
-        burger.addEventListener("click", function () {
-          mainNav.classList.toggle("open");
-          burger.classList.toggle("active");
-        });
-
-        mainNav.querySelectorAll("a").forEach(link => {
-          link.addEventListener("click", function () {
-            mainNav.classList.remove("open");
-            burger.classList.remove("active");
-          });
-        });
-      }
-
-      const yearEl = document.getElementById("year2");
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-      }
+    // Fade-in animation with staggered delay
+    document.addEventListener('DOMContentLoaded', () => {
+      const posts = document.querySelectorAll('.post-card');
+      posts.forEach((post, index) => {
+        post.style.setProperty('--delay', `${index * 0.1}s`);
+        // Force reflow then add animation class (already animated via CSS, so just delay is enough)
+      });
     });
   </script>
-
-  <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
