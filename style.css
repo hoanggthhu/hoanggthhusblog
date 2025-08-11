@@ -596,6 +596,21 @@ body {
   color: #666;
   letter-spacing: 0.2px;
 }
+/* Highlight cho menu đang active */
+.main-nav a.active {
+  background-color: #f59e0b; /* Màu cam highlight */
+  color: #fff; /* Chữ trắng */
+  padding: 8px 14px; /* Thêm khoảng trống 2 bên chữ */
+  border-radius: 6px; /* Bo góc */
+  display: inline-block; /* Đảm bảo padding có tác dụng */
+  line-height: 1.4; /* Khoảng thở cho chữ */
+  text-decoration: none; /* Xóa gạch chân nếu có */
+}
+
+.main-nav li {
+  display: inline-block;
+  margin: 0 4px; /* Giãn cách giữa các mục menu */
+}
 
 
 
