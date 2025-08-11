@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ===== Core/hero/header (kept theme) ===== */
+    /* Hero section */
     .hero {
       position: relative;
       height: 80vh;
@@ -20,7 +20,12 @@
     }
     .hero video {
       position: absolute;
-      top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
     }
     .hero::after {
       content: '';
@@ -29,170 +34,226 @@
       background: rgba(0,0,0,0.3);
       z-index: 1;
     }
-    .hero-content { position: relative; max-width:700px; z-index:2; animation:fadeInUp 1.2s ease-out; }
-    .hero-content h1 { font-family: 'Playfair Display', serif; font-size:3rem; margin-bottom:12px; }
-    .hero-content p { font-size:1.1rem; opacity:.95; }
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+      z-index: 2;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
 
-    /* gradient title (kept) */
-    .gradient-title {
-      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #ffdde1);
+    /* Gradient màu hologram cho tiêu đề hero */
+    .hero-content h1.gradient-title {
+      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-size: 200%;
+      background-position: 0%;
       animation: gradientMove 6s ease infinite;
     }
-    @keyframes gradientMove { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-    @keyframes fadeInUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+    /* Latest posts */
+    .latest-posts {
+      padding: 50px 20px;
+      background: #fdfaf7;
+    }
+    .latest-posts h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-family: 'Playfair Display', serif;
+    }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .post-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    .post-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .post-card:hover {
+      transform: translateY(-5px);
+    }
+    .post-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .post-body {
+      padding: 15px;
+    }
+    .post-body h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .post-body p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    .read-btn {
+      display: inline-block;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, var(--accent1, #f59e0b), var(--accent2, #ef4444));
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
 
-    /* ===== Header & Nav ===== */
-    .site-header {
+    /* Animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Header styles */
+    .site-header .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       position: relative;
-      z-index: 9999 !important; /* luôn trên cùng */
-      background: transparent;
     }
-    .header-inner {
-      display:flex; align-items:center; justify-content:flex-start; gap:20px;
-      padding: 18px 20px; position: relative;
+    .site-header .brand {
+      display: block;
+      text-decoration: none;
+      color: inherit;
     }
-
-    .brand { z-index: 2; text-decoration:none; color:inherit; }
-    .brand h1, .brand p { margin: 0; }
-    .brand h1 { font-size: 1.8rem; }
-
-    /* Center nav on desktop */
+    .site-header .brand h1,
+    .site-header .brand p {
+      margin: 0;
+    }
+    .site-header .brand h1 {
+      font-size: 1.8rem;
+    }
     .site-header .main-nav {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-      display:flex;
-      align-items:center;
-      z-index: 10005; /* higher than title shine */
-      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
-    .site-header .main-nav ul { display:flex; gap:28px; margin:0; padding:0; list-style:none; align-items:center; }
-    /* reset possible pseudo-element leftovers */
-    .site-header .main-nav a::before,
-    .site-header .main-nav a::after {
-      /* clear other libs' markers */
-      display: none !important;
-      content: none !important;
+    .site-header .main-nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
     }
-
-    /* base link */
     .site-header .main-nav ul li a {
-      position: relative;
-      display:inline-block;
-      color:#333;
-      text-decoration:none;
-      padding:6px 10px;
-      border-radius:6px;
-      font-weight:600;
-      transition: color .18s ease, transform .12s ease, background .22s ease;
-      z-index: 10006; /* above brand shine */
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      padding: 6px 8px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
     }
-    .site-header .main-nav ul li a:hover {
-      transform: translateY(-1px);
-      color:#111;
-    }
-
-    /* Active/hover: gradient pill like Mơ Nắng + small purple underline */
     .site-header .main-nav ul li a:hover,
     .site-header .main-nav ul li a.active {
-      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #ffdde1);
-      color: #fff !important;
-      -webkit-text-fill-color: #fff !important;
-      background-size: 200% 200%;
-      animation: gradientMove 4s ease infinite;
+      background-color: #f59e0b;
+      color: white;
     }
 
-    /* purple underline centered for active */
-    .site-header .main-nav ul li a.active::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -8px;
-      width: 34px;
-      height: 3px;
-      border-radius: 3px;
-      background: linear-gradient(90deg,#6d4ba3,#c58eb4);
-      z-index: 10007;
-      display: block;
+    /* Mobile menu toggle */
+    #nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #333;
+      z-index: 10001;
     }
 
-    /* Make sure title shine sits behind nav */
-    /* If your other stylesheet defines .brand h1::after (shine), ensure it's lower z-index */
-    .brand h1, .brand h1::after { position: relative; z-index: 1; }
-
-    /* ===== Mobile: off-canvas right + overlay ===== */
-    #nav-toggle { display:none; position:relative; z-index:10010; background:none; border:none; font-size:1.8rem; cursor:pointer; color:#333; }
-    .menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.42); opacity:0; visibility:hidden; transition: opacity .28s ease, visibility .28s ease; z-index:9998; }
-    .menu-overlay.active { opacity:1; visibility:visible; }
-
-    @media (max-width: 980px) {
-      .site-header .main-nav {
-        position: fixed;
-        top: 0;
-        right: -320px;
-        width: 280px;
-        height: 100%;
-        left: auto;
-        transform: none;
-        padding-top: 74px;
-        background: white;
-        display:flex;
-        flex-direction:column;
-        gap:10px;
-        justify-content:flex-start;
-        box-shadow:-6px 0 24px rgba(0,0,0,.12);
-        transition: right .32s ease;
-        z-index: 10005;
+    @media (max-width: 768px) {
+      #nav-toggle {
+        display: block;
       }
-      .site-header .main-nav.active { right: 0; }
-      .site-header .main-nav ul { flex-direction: column; gap: 0; padding: 10px 0; }
-      .site-header .main-nav li { border-bottom: 1px solid #f1eee9; }
-      .site-header .main-nav a { padding: 12px 18px; color:#333; }
-      #nav-toggle { display:inline-block; }
+      .site-header .main-nav {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 100px; /* kéo xuống dưới header */
+        right: 20px;
+        width: calc(100% - 40px);
+        max-width: 320px;
+        background: white;
+        border-radius: 12px;
+        padding: 15px 0;
+        z-index: 10000;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      }
+      .site-header .main-nav.active {
+        display: flex;
+      }
+      .site-header .main-nav ul {
+        flex-direction: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: 10px;
+      }
+      .site-header .main-nav ul li {
+        text-align: center;
+        margin: 0;
+      }
+      .site-header .main-nav ul li a {
+        display: block;
+        padding: 10px;
+        color: #333;
+      }
     }
 
-    /* keep rest of page theme intact */
-    .latest-posts { padding: 50px 20px; background: #fdfaf7; }
-    .posts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
-    .post-card { background:white; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.06); overflow:hidden; transform:translateY(30px); opacity:0; transition:transform .5s ease,opacity .5s ease; }
-    .post-card.visible { transform:translateY(0); opacity:1; }
-    .post-card img { width:100%; height:200px; object-fit:cover; }
-
-    .no-scroll { overflow:hidden; height:100%; }
+    /* Chặn scroll khi menu mở */
+    .no-scroll {
+      overflow: hidden;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner" style="position:relative;">
+    <div class="container header-inner">
       <a class="brand" href="index.html">
         <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
         <p class="tag"> Mình học cách yêu thương</p>
         <p class="tag"> và trưởng thành với một trái tim nguyên vẹn</p>
       </a>
-
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
-
-      <nav id="main-nav" class="main-nav" aria-hidden="true">
+      <nav id="main-nav" class="main-nav">
         <ul>
-          <li><a href="index.html" class="active">Trang chủ</a></li>
+          <li><a href="index.html">Trang chủ</a></li>
           <li><a href="mo-nang.html">Mơ Nắng</a></li>
           <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
           <li><a href="binh-yen.html">Góc bình yên</a></li>
-          <li><a href="blogs.html">Danh sách blog</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
           <li><a href="ve-toi.html">Về mình</a></li>
           <li><a href="contact.html">Liên lạc</a></li>
         </ul>
       </nav>
     </div>
   </header>
-
-  <div id="menu-overlay" class="menu-overlay" aria-hidden="true"></div>
 
   <section class="hero">
     <video autoplay muted loop playsinline>
@@ -241,47 +302,39 @@
   </footer>
 
   <script>
-    // year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // menu toggle + overlay
     const navToggle = document.getElementById("nav-toggle");
     const mainNav = document.getElementById("main-nav");
-    const overlay = document.getElementById("menu-overlay");
 
-    function openMenu() {
-      mainNav.classList.add('active');
-      overlay.classList.add('active');
-      mainNav.setAttribute('aria-hidden','false');
-      overlay.setAttribute('aria-hidden','false');
-      document.body.classList.add('no-scroll');
-    }
-    function closeMenu() {
-      mainNav.classList.remove('active');
-      overlay.classList.remove('active');
-      mainNav.setAttribute('aria-hidden','true');
-      overlay.setAttribute('aria-hidden','true');
-      document.body.classList.remove('no-scroll');
-    }
-    navToggle.addEventListener('click', () => {
-      if (mainNav.classList.contains('active')) closeMenu(); else openMenu();
+    navToggle.addEventListener("click", function () {
+      mainNav.classList.toggle("active");
+      document.body.classList.toggle("no-scroll");
     });
-    overlay.addEventListener('click', closeMenu);
-    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
 
-    // reveal posts
+    mainNav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mainNav.classList.remove("active");
+        document.body.classList.remove("no-scroll");
+      });
+    });
+
+    // Hiệu ứng fade-in cho post-card với delay so le
     const postCards = document.querySelectorAll('.post-card');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          const index = Array.from(postCards).indexOf(entry.target);
+          entry.target.style.transitionDelay = ${index * 0.15}s;
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.2 });
-    postCards.forEach(c => observer.observe(c));
 
-    // auto active menu by url (keeps .active on proper item)
+    postCards.forEach(card => observer.observe(card));
+
+    // Tự động active menu dựa trên URL
     document.addEventListener("DOMContentLoaded", function() {
       const currentPath = window.location.pathname.split("/").pop() || "index.html";
       document.querySelectorAll('#main-nav a').forEach(link => {
