@@ -105,7 +105,6 @@
         right: 0;
         width: 200px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        z-index: 10000;
       }
       .main-nav.nav-open {
         display: flex;
@@ -122,11 +121,6 @@
       .main-nav a {
         display: block;
         padding: 10px;
-      }
-      .main-nav a.active {
-        background-color: #6a4caf;
-        color: white;
-        border-radius: 4px;
       }
     }
   </style>
@@ -159,8 +153,26 @@
     })();
   </script>
 
-  <!-- Header placeholder -->
-  <div id="header-placeholder"></div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <h1 class="gradient-title">Góc bình yên</h1>
+        <p class="tag">Một chút trà, bánh và một câu chuyện</p>
+      </a>
+      <button class="menu-toggle">☰</button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
+          <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
+          <li><a href="binh-yen.html" class="active">Góc bình yên</a></li>
+          <li><a href="blogs.html">Blogs</a></li>
+          <li><a href="ve-toi.html">Về mình</a></li>
+          <li><a href="contact.html">Liên lạc</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main class="container">
     <section class="category-header">
@@ -171,7 +183,7 @@
 
     <section class="posts-list">
       <article class="post-card">
-        <img src="https://raw.githubusercontent.com/hoanggthhu/hoanggthhusblog/refs/heads/main/emotionpic.png?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
         <div class="post-body">
           <h4>Viết cho những ngày mình muốn bỏ cuộc</h4>
           <p class="excerpt">Một thư nhẹ gửi bản thân — để biết mình không đơn độc.</p>
@@ -180,7 +192,7 @@
       </article>
 
       <article class="post-card">
-        <img src="https://raw.githubusercontent.com/hoanggthhu/hoanggthhusblog/refs/heads/main/SMPIC.png?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
+        <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3" alt="">
         <div class="post-body">
           <h4>Những điều nhỏ bé nhưng làm mình hạnh phúc</h4>
           <p class="excerpt">Danh sách nhỏ để bạn giữ lại khi ngày trở nên nặng.</p>
@@ -196,36 +208,23 @@
     </div>
   </footer>
 
-  <!-- Load header and burger menu script -->
+  <!-- Burger menu script -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      fetch('header.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('header-placeholder').innerHTML = data;
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector(".main-nav");
 
-          const navToggle = document.getElementById('nav-toggle');
-          const mainNav = document.getElementById('main-nav');
+      if (toggle && nav) {
+        toggle.addEventListener("click", () => {
+          nav.classList.toggle("nav-open");
+        });
 
-          navToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('nav-open');
-          });
-
-          mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-              mainNav.classList.remove('nav-open');
-            });
-          });
-
-          // Sửa class active menu ngay đây, vì header được load động
-          mainNav.querySelectorAll('a').forEach(link => {
-            if(link.getAttribute('href') === 'binh-yen.html'){
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
+        nav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            nav.classList.remove("nav-open");
           });
         });
+      }
 
       const yearEl = document.getElementById("year4");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -233,8 +232,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 

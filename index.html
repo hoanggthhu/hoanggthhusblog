@@ -50,21 +50,6 @@
       opacity: 0.9;
     }
 
-    /* Gradient màu hologram cho tiêu đề hero */
-    .hero-content h1.gradient-title {
-      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-size: 200%;
-      background-position: 0%;
-      animation: gradientMove 6s ease infinite;
-    }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     /* Latest posts */
     .latest-posts {
       padding: 50px 20px;
@@ -130,51 +115,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Header styles */
-    .site-header .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-    .site-header .brand {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-    }
-    .site-header .brand h1,
-    .site-header .brand p {
-      margin: 0;
-    }
-    .site-header .brand h1 {
-      font-size: 1.8rem;
-    }
-    .site-header .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .site-header .main-nav ul {
-      display: flex;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      gap: 20px;
-    }
-    .site-header .main-nav ul li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 600;
-      padding: 6px 8px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
-    .site-header .main-nav ul li a:hover,
-    .site-header .main-nav ul li a.active {
-      background-color: #f59e0b;
-      color: white;
-    }
-
     /* Mobile menu toggle */
     #nav-toggle {
       display: none;
@@ -182,45 +122,39 @@
       border: none;
       font-size: 1.8rem;
       cursor: pointer;
-      color: #333;
-      z-index: 10001;
     }
-
     @media (max-width: 768px) {
       #nav-toggle {
         display: block;
+        color: #333;
+        z-index: 10001;
       }
-      .site-header .main-nav {
+      #main-nav {
         display: none;
-        flex-direction: column;
-        position: fixed;
-        top: 100px; /* kéo xuống dưới header */
-        right: 20px;
-        width: calc(100% - 40px);
-        max-width: 320px;
         background: white;
-        border-radius: 12px;
-        padding: 15px 0;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        left: 0;
+        padding: 10px 0;
         z-index: 10000;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       }
-      .site-header .main-nav.active {
-        display: flex;
+      #main-nav.active {
+        display: block;
       }
-      .site-header .main-nav ul {
-        flex-direction: column;
+      #main-nav ul {
         list-style: none;
         padding: 0;
         margin: 0;
-        gap: 10px;
       }
-      .site-header .main-nav ul li {
+      #main-nav ul li {
         text-align: center;
-        margin: 0;
+        margin: 10px 0;
       }
-      .site-header .main-nav ul li a {
+      #main-nav ul li a {
         display: block;
         padding: 10px;
+        text-decoration: none;
         color: #333;
       }
     }
@@ -234,7 +168,7 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="container header-inner" style="position: relative;">
       <a class="brand" href="index.html">
         <h1 class="gradient-title">Hoàngg Thhư's Blog</h1>
         <p class="tag"> Mình học cách yêu thương</p>
@@ -243,7 +177,7 @@
       <button id="nav-toggle" aria-label="Toggle menu">☰</button>
       <nav id="main-nav" class="main-nav">
         <ul>
-          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="index.html" class="active">Trang chủ</a></li>
           <li><a href="mo-nang.html">Mơ Nắng</a></li>
           <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
           <li><a href="binh-yen.html">Góc bình yên</a></li>
@@ -269,7 +203,7 @@
     <h2>Bài viết mới nhất</h2>
     <div class="posts-grid">
       <article class="post-card">
-        <img src="https://raw.githubusercontent.com/hoanggthhu/hoanggthhusblog/refs/heads/main/emotionpic.png?q=80&w=1200&auto=format&fit=crop" alt="">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="">
         <div class="post-body">
           <h4>Viết cho những ngày muốn bỏ cuộc</h4>
           <p>Một thư nhẹ gửi bản thân — để biết mình không đơn độc.</p>
@@ -277,7 +211,7 @@
         </div>
       </article>
       <article class="post-card">
-        <img src="https://raw.githubusercontent.com/hoanggthhu/hoanggthhusblog/refs/heads/main/SMPIC.png?q=80&w=1200&auto=format&fit=crop" alt="">
+        <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="">
         <div class="post-body">
           <h4>Những điều nhỏ bé làm mình hạnh phúc</h4>
           <p>Danh sách nhỏ để bạn giữ lại khi ngày trở nên nặng.</p>
@@ -325,7 +259,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const index = Array.from(postCards).indexOf(entry.target);
-          entry.target.style.transitionDelay = ${index * 0.15}s;
+          entry.target.style.transitionDelay = `${index * 0.15}s`;
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
@@ -333,28 +267,9 @@
     }, { threshold: 0.2 });
 
     postCards.forEach(card => observer.observe(card));
-
-    // Tự động active menu dựa trên URL
-    document.addEventListener("DOMContentLoaded", function() {
-      const currentPath = window.location.pathname.split("/").pop() || "index.html";
-      document.querySelectorAll('#main-nav a').forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-    });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 

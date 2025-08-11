@@ -54,7 +54,7 @@
       }
     }
 
-    /* Hiệu ứng fade-in + hover cho bài viết */
+    /* === Hiệu ứng fade-in + hover cho bài viết === */
     .post-card {
       opacity: 0;
       transform: translateY(40px);
@@ -69,29 +69,6 @@
     }
     .post-card:hover img {
       transform: scale(1.05);
-    }
-
-    /* Gradient cho tiêu đề Danh sách Blogs */
-    .section-title.gradient-title {
-      background: linear-gradient(120deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-size: 200%;
-      animation: gradientMove 6s ease infinite;
-      text-align: center;
-      font-weight: 700;
-    }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .lead {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #555;
-      margin-bottom: 2rem;
-      font-weight: 300;
     }
   </style>
 </head>
@@ -127,17 +104,17 @@
         <article class="post-card">
           <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bình Yên">
           <div class="post-body">
-            <h4><a href="binh-yen.html">Góc bình yên</a></h4>
-            <p class="excerpt">Những khoảnh khắc tĩnh lặng giữa cuộc sống vội vã. Một chén trà, một mảnh vườn và hơi thở thật nhẹ...</p>
+            <h4><a href="binh-yen.html">Góc một chút bình yên</a></h4>
+            <p class="excerpt">Những khoảnh khắc tĩnh lặng giữa cuộc sống vội vã — một chén trà, một mảnh vườn và đủ để thở nhẹ...</p>
             <p><a class="read" href="binh-yen.html">Đọc tiếp →</a></p>
           </div>
         </article>
 
         <article class="post-card">
-          <img src="https://raw.githubusercontent.com/hoanggthhu/hoanggthhusblog/refs/heads/main/monanglogo.png?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mơ Nắng">
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mơ Nắng">
           <div class="post-body">
-            <h4><a href="mo-nang.html">Mơ Nắng - Những câu chuyện về thêu thùa</a></h4>
-            <p class="excerpt">Giấc mơ mang hương vị của những tia nắng đầu ngày. Nơi những món đồ thủ công mang theo cả ký ức.</p>
+            <h4><a href="mo-nang.html">Mơ Nắng — Đồ thêu & câu chuyện</a></h4>
+            <p class="excerpt">Giấc mơ mang hương vị của những tia nắng đầu ngày — nơi những đồ thủ công mang theo cả ký ức.</p>
             <p><a class="read" href="mo-nang.html">Đọc tiếp →</a></p>
           </div>
         </article>
@@ -146,7 +123,7 @@
           <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ở Trong Vườn">
           <div class="post-body">
             <h4><a href="o-trong-vuon.html">Ở Trong Vườn</a></h4>
-            <p class="excerpt">Hành trình đi dạo trong vườn, nghe tiếng lá rơi, ngửi thấy mùi hương và tìm lại mấy điều đơn giản.</p>
+            <p class="excerpt">Hành trình đi dạo trong vườn, nghe tiếng lá và tìm lại mấy điều đơn giản.</p>
             <p><a class="read" href="o-trong-vuon.html">Đọc tiếp →</a></p>
           </div>
         </article>
@@ -160,28 +137,34 @@
     </div>
   </footer>
 
+  <!-- Burger menu script -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const toggle = document.getElementById("nav-toggle");
       const nav = document.getElementById("main-nav");
+
       if (toggle && nav) {
         toggle.addEventListener("click", () => {
           nav.classList.toggle("nav-open");
         });
+
         nav.querySelectorAll("a").forEach(link => {
           link.addEventListener("click", () => {
             nav.classList.remove("nav-open");
           });
         });
       }
+
       document.getElementById("year").textContent = new Date().getFullYear();
     });
   </script>
 
+  <!-- Browser Detect -->
   <script>
     (function() {
       const ua = navigator.userAgent;
       let browserName = "Không xác định";
+
       if (/chrome|crios|crmo/i.test(ua) && !/edge|edg/i.test(ua)) {
         browserName = "Google Chrome";
       } else if (/firefox|fxios/i.test(ua)) {
@@ -193,12 +176,15 @@
       } else if (/msie|trident/i.test(ua)) {
         browserName = "Internet Explorer";
       }
+
       if (browserName === "Safari" || browserName === "Internet Explorer") {
         alert(`Bạn đang dùng ${browserName}. Một số hiệu ứng có thể hiển thị khác trên trình duyệt này.`);
       }
+      console.log("Trình duyệt của bạn:", browserName);
     })();
   </script>
 
+  <!-- Hiệu ứng fade-in khi cuộn -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const cards = document.querySelectorAll(".post-card");
@@ -210,9 +196,9 @@
           }
         });
       }, { threshold: 0.2 });
+
       cards.forEach(card => observer.observe(card));
     });
   </script>
 </body>
 </html>
-
