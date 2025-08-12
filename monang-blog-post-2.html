@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ngày nắng và tách trà</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner" style="position:relative;">
+      <a class="brand" href="index.html" aria-label="Về trang chủ">
+        <h1 class="gradient-title">Mơ Nắng</h1>
+        <p class="tag">Những món đồ mang năng lượng chữa lành</p>
+      </a>
+
+      <button class="burger" id="burger" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-hidden="true">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
+          <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
+          <li><a href="binh-yen.html">Góc bình yên</a></li>
+          <li><a href="blogs.html" class="active">Blogs</a></li>
+          <li><a href="ve-toi.html">Về mình</a></li>
+          <li><a href="contact.html">Liên lạc</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="blog-post">
+      <h2 class="gradient-title">Hành trình tạo nên chiếc khăn tay đầu tiên</h2>
+      <p><em>Ngày đăng: 10/08/2025</em></p>
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Chiếc khăn tay thêu" style="max-width:100%; border-radius:12px; margin: 1rem 0;">
+      <p>Chiếc khăn tay đầu tiên của Mơ Nắng được tạo ra trong một hành trình đầy cảm xúc và tâm huyết. Từng đường kim mũi chỉ được thêu cẩn thận, chọn lọc chất liệu tỉ mỉ để đảm bảo sự bền đẹp và truyền tải được năng lượng chữa lành mà chúng tôi muốn gửi gắm.</p>
+      <p>Quá trình này bắt đầu từ ý tưởng, rồi phác thảo mẫu thêu, lựa chọn chỉ thêu và vải. Mỗi công đoạn đều được làm bằng tình yêu và sự kiên nhẫn, để tạo ra sản phẩm không chỉ đẹp mà còn mang câu chuyện riêng.</p>
+      <p>Chúng tôi hy vọng chiếc khăn tay không chỉ là vật dụng mà còn là người bạn đồng hành, truyền cảm hứng và sự yên bình trong cuộc sống của bạn.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year2"></span> Hoàngg Thhư's Blog</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const burger = document.getElementById("burger");
+      const mainNav = document.getElementById("mainNav");
+      const yearEl = document.getElementById("year2");
+
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      function openMenu() {
+        mainNav.classList.add("open");
+        burger.classList.add("active");
+        burger.setAttribute("aria-expanded", "true");
+        mainNav.setAttribute("aria-hidden", "false");
+      }
+      function closeMenu() {
+        mainNav.classList.remove("open");
+        burger.classList.remove("active");
+        burger.setAttribute("aria-expanded", "false");
+        mainNav.setAttribute("aria-hidden", "true");
+      }
+
+      burger.addEventListener("click", () => {
+        const isOpen = mainNav.classList.contains("open");
+        if (isOpen) closeMenu(); else openMenu();
+      });
+
+      burger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          burger.click();
+        } else if (e.key === "Escape") {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!mainNav.contains(e.target) && !burger.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+
+      mainNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          closeMenu();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
