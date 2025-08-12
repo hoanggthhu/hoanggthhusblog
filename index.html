@@ -115,6 +115,19 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Luôn đảm bảo header & menu nằm trên video */
+    .site-header {
+      position: relative;
+      z-index: 10002;
+    }
+    #nav-toggle {
+      position: relative;
+      z-index: 10003;
+    }
+    #main-nav {
+      z-index: 10002;
+    }
+
     /* Mobile menu toggle */
     #nav-toggle {
       display: none;
@@ -127,7 +140,6 @@
       #nav-toggle {
         display: block;
         color: #333;
-        z-index: 10001;
       }
       #main-nav {
         display: none;
@@ -137,7 +149,7 @@
         right: 0;
         left: 0;
         padding: 10px 0;
-        z-index: 10000;
+        z-index: 10002; /* nổi trên video */
       }
       #main-nav.active {
         display: block;
@@ -270,6 +282,7 @@
   </script>
 </body>
 </html>
+
 
 
 
