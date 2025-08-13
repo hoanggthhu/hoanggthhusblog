@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Những ngày gió ngược – Viết cho lúc lòng mình mỏi mệt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .blog-content {
+      white-space: pre-wrap;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner" style="position:relative;">
+      <a class="brand" href="index.html" aria-label="Về trang chủ">
+        <h1 class="gradient-title">Góc Bình Yên</h1>
+        <p class="tag">Một chút trà, bánh và một câu chuyện</p>
+      </a>
+
+      <button class="burger" id="burger" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-hidden="true">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="mo-nang.html">Mơ Nắng</a></li>
+          <li><a href="o-trong-vuon.html">Ở Trong Vườn</a></li>
+          <li><a href="binh-yen.html">Góc bình yên</a></li>
+          <li><a href="blogs.html" class="active">Blogs</a></li>
+          <li><a href="ve-toi.html">Về mình</a></li>
+          <li><a href="contact.html">Liên lạc</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="blog-post">
+      <h2 class="gradient-title">Những ngày gió ngược – Viết cho lúc lòng mình mỏi mệt</h2>
+      <p><em>Ngày đăng: 12/08/2025</em></p>
+      <img src="hinhblogs22.png?auto=format&fit=crop&w=800&q=80" alt="Người thợ thêu và cơn mưa mùa hạ" style="max-width:100%; border-radius:12px; margin: 1rem 0;">
+      <div class="blog-content">
+Có những ngày, mọi thứ như đang chống lại mình. Công việc dồn dập, kế hoạch đổ bể, những người mình thương lại không hiểu được mình. Mình bước ra đường, gió khẽ lùa nhẹ qua tóc, mà sao thấy lạnh buốt đến tận tim. Đó là những ngày gió ngược... Không phải chỉ có ở ngoài trời, mà cả ở trong lòng.
+
+Mình biết, sẽ có lúc mình cảm thấy kiệt sức. Không phải vì mình yếu đuối, mà vì mình đã cố gắng gượng quá lâu, quá nhiều. Cái mỏi mệt ấy không chỉ ở cơ thể, mà nó còn len lỏi đến tận trái tim. Nó khiến mình muốn buông xuôi, muốn để mặc tất cả trôi đi mà chẳng buồn đoái hoài.
+
+Nhưng mà này, hãy thử ngồi xuống một vài phút. Thở thật sâu. Nhìn lại xem mình đã đi qua bao nhiêu chặng đường gió ngược rồi. Có phải trước đây cũng từng nghĩ mình sẽ không vượt qua nổi? Thế mà giờ mình vẫn đang ở đây, vẫn sống, vẫn thở, vẫn có thể viết vài dòng này cho chính mình.
+
+Những ngày gió ngược không đến để quật ngã mình, mà để dạy mình cách đứng vững hơn, vững như một cái cây. Có thể hôm nay mình chưa nhận thấy được điều đó, nhưng một ngày nào đó, khi ngoảnh lại, mình sẽ lại mỉm cười vì ít ra đã không bỏ cuộc.
+
+Vậy nên, nếu thấy mỏi mệt, hãy cứ nghỉ ngơi đi. Uống một tách trà nóng. Nghe bản nhạc mình yêu thích. Đọc vài trang sách, hay là nói chuyện với một người khiến mình thấy dễ chịu. Và nếu không muốn làm gì cả, thì cũng chẳng sao. Nghỉ ngơi cũng là một phần của hành trình.
+
+Rồi gió sẽ đổi chiều. Nắng sẽ lại về. Cánh đồng sẽ xanh trở lại. Và sau tất cả, mình sẽ lại bước tiếp, mạnh mẽ và dịu dàng hơn xưa.
+
+Hãy nhớ, mình không đơn độc.
+
+
+        
+        - Hoàngg Thhư's Blog -
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year2"></span> Hoàngg Thhư's Blog</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const burger = document.getElementById("burger");
+      const mainNav = document.getElementById("mainNav");
+      const yearEl = document.getElementById("year2");
+
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      function openMenu() {
+        mainNav.classList.add("open");
+        burger.classList.add("active");
+        burger.setAttribute("aria-expanded", "true");
+        mainNav.setAttribute("aria-hidden", "false");
+      }
+      function closeMenu() {
+        mainNav.classList.remove("open");
+        burger.classList.remove("active");
+        burger.setAttribute("aria-expanded", "false");
+        mainNav.setAttribute("aria-hidden", "true");
+      }
+
+      burger.addEventListener("click", () => {
+        const isOpen = mainNav.classList.contains("open");
+        if (isOpen) closeMenu(); else openMenu();
+      });
+
+      burger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          burger.click();
+        } else if (e.key === "Escape") {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!mainNav.contains(e.target) && !burger.contains(e.target)) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+
+      mainNav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          closeMenu();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
