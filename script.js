@@ -79,10 +79,10 @@ document.addEventListener('DOMContentLoaded', function(){
   const ap = new APlayer({
     container: document.getElementById('aplayer'),
     audio: [{
-      name: 'My Song',
+      name: 'HoanggThhusBlog',
       artist: 'Unknown',
-      url: 'https://raw.githubusercontent.com/<user>/<repo>/main/music.mp3',
-      cover: 'cover.jpg'
+      url: 'rhapsody_in_the_garden-steve_lowther.mp3',
+      cover: 'SMPIC.png'
     }]
   });
 });
