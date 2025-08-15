@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
   const nav = document.querySelector('.main-nav');
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
-      nav.classList.toggle('active'); // class 'active' đã có trong CSS mobile
+      nav.classList.toggle('active');
     });
   }
 
@@ -70,6 +70,21 @@ document.addEventListener('DOMContentLoaded', function(){
       link.classList.add("active");
     }
   });
+
+  // === Music player ===
+  const musicContainer = document.createElement('div');
+  musicContainer.id = 'aplayer';
+  document.body.appendChild(musicContainer);
+
+  const ap = new APlayer({
+    container: document.getElementById('aplayer'),
+    audio: [{
+      name: 'My Song',
+      artist: 'Unknown',
+      url: 'https://raw.githubusercontent.com/<user>/<repo>/main/music.mp3',
+      cover: 'cover.jpg'
+    }]
+  });
 });
 
 // Typewriter helper
@@ -86,8 +101,7 @@ function typeWriterEffect(elementId, text, speed) {
   typing();
 }
 </script>
-</body>
-</html>
+
 
 
 
