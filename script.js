@@ -1,6 +1,15 @@
 <script>
-document.addEventListener('DOMContentLoaded', function(){
-  // === Toggle menu cho header ===
+document.addEventListener('DOMContentLoaded', function () {
+  initMenuToggle();
+  fillYears();
+  initTypingEffect();
+  initFadeIn();
+  initAutoIntroMessage();
+  setActiveMenu();
+});
+
+// === Toggle menu cho header ===
+function initMenuToggle() {
   const toggle = document.getElementById('burger');
   const nav = document.querySelector('.main-nav');
   if (toggle && nav) {
@@ -8,39 +17,46 @@ document.addEventListener('DOMContentLoaded', function(){
       nav.classList.toggle('active');
     });
   }
+}
 
-  // === Year filler ===
-  const years = [ 'year','year2','year3','year4','year5','year6' ];
+// === Year filler ===
+function fillYears() {
+  const years = ['year', 'year2', 'year3', 'year4', 'year5', 'year6'];
+  const currentYear = new Date().getFullYear();
   years.forEach(id => {
     const el = document.getElementById(id);
-    if(el) el.textContent = new Date().getFullYear();
+    if (el) el.textContent = currentYear;
   });
+}
 
-  // === Typing effect ===
+// === Typing effect (dùng cho .typing) ===
+function initTypingEffect() {
   const typingEl = document.querySelector('.typing');
   if (typingEl) {
     const text = typingEl.getAttribute('data-text') || '';
-    let i = 0;
-    function type(){
-      if (i <= text.length) {
-        typingEl.textContent = text.slice(0, i);
-        i++;
-        setTimeout(type, 40);
-      }
-    }
-    type();
+    typeWriterEffect(typingEl, text, 40);
   }
+}
 
-  // === Fade-in animation on scroll ===
+// === Fade-in animation on scroll ===
+function initFadeIn() {
   const elements = document.querySelectorAll('.fade-in');
+  if (!elements.length) return;
+
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // chỉ observe 1 lần
+      }
     });
   }, { threshold: 0.1 });
-  elements.forEach(el => observer.observe(el));
 
-  // === Auto intro message ===
+  elements.forEach(el => observer.observe(el));
+}
+
+// === Auto intro message theo page ===
+function initAutoIntroMessage() {
   const messages = {
     "mo-nang.html": "Giặt những giấc mơ rồi phơi dưới nắng",
     "o-trong-vuon.html": "Nơi mùi hương biết kể chuyện",
@@ -48,52 +64,42 @@ document.addEventListener('DOMContentLoaded', function(){
     "blogs.html": "Dừng lại để nghe những câu chuyện bên lề ở đây",
     "ve-toi.html": "Đôi dòng về mình"
   };
-  const currentPage = window.location.pathname.split("/").pop();
-  const text = messages[currentPage];
-  if (text) {
-    const categoryHeader = document.querySelector(".category-header h2");
-    if (categoryHeader) {
-      const introDiv = document.createElement("div");
-      introDiv.classList.add("intro-message");
-      const h3 = document.createElement("h3");
-      h3.id = "typewriter";
-      introDiv.appendChild(h3);
-      categoryHeader.insertAdjacentElement("afterend", introDiv);
-      typeWriterEffect("typewriter", text, 50);
-    }
-  }
 
-  // === Auto active menu ===
+  const currentPage = window.location.pathname.split("/").pop();
+  const message = messages[currentPage];
+  if (!message) return;
+
+  const categoryHeader = document.querySelector(".category-header h2");
+  if (categoryHeader) {
+    const introDiv = document.createElement("div");
+    introDiv.classList.add("intro-message");
+
+    const h3 = document.createElement("h3");
+    introDiv.appendChild(h3);
+
+    categoryHeader.insertAdjacentElement("afterend", introDiv);
+
+    typeWriterEffect(h3, message, 50);
+  }
+}
+
+// === Auto active menu ===
+function setActiveMenu() {
+  const currentPage = window.location.pathname.split("/").pop();
   document.querySelectorAll(".main-nav a").forEach(link => {
-    if (link.getAttribute("href") === currentPage || 
-        (currentPage === "" && link.getAttribute("href") === "index.html")) {
+    const href = link.getAttribute("href");
+    if (href === currentPage || (currentPage === "" && href === "index.html")) {
       link.classList.add("active");
     }
   });
+}
 
-  // === Music player ===
-  const musicContainer = document.createElement('div');
-  musicContainer.id = 'aplayer';
-  document.body.appendChild(musicContainer);
-
-  const ap = new APlayer({
-    container: document.getElementById('aplayer'),
-    audio: [{
-      name: 'HoanggThhusBlog',
-      artist: 'Unknown',
-      url: 'rhapsody_in_the_garden-steve_lowther.mp3',
-      cover: 'SMPIC.png'
-    }]
-  });
-});
-
-// Typewriter helper
-function typeWriterEffect(elementId, text, speed) {
+// === Typewriter helper ===
+function typeWriterEffect(element, text, speed = 40) {
   let i = 0;
-  const el = document.getElementById(elementId);
   function typing() {
-    if (i < text.length) {
-      el.textContent += text.charAt(i);
+    if (i <= text.length) {
+      element.textContent = text.slice(0, i);
       i++;
       setTimeout(typing, speed);
     }
@@ -101,6 +107,7 @@ function typeWriterEffect(elementId, text, speed) {
   typing();
 }
 </script>
+
 
 
 
